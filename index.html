@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.25.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.25.0" />
+  <title>Lovely 길드 포털 v1.26.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.26.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
       <div>
-        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.25.0</span></p>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.26.0</span></p>
         <h1 id="title">Lovely 길드 포털</h1>
         <p id="subtitle" class="hidden-subtitle"></p>
       </div>
@@ -21,11 +21,8 @@
       </div>
       <div class="main-nav desktop-nav" aria-label="메인 메뉴">
         <button class="main-tab active" data-page="dashboard" type="button">현황</button>
-        <button class="main-tab" data-page="live-tobeol" type="button">실시간 토벌</button>
-        <button class="main-tab" data-page="contents" type="button">길드 컨텐츠</button>
-        <button class="main-tab" data-page="hotdeals" type="button">핫딜</button>
+        <button class="main-tab" data-page="live-tobeol" type="button">토벌전</button>
         <button class="main-tab" data-page="guide" type="button">공략</button>
-        <button class="main-tab" data-page="links" type="button">링크</button>
       </div>
     </section>
 
@@ -37,13 +34,13 @@
         <div class="featured-header">
           <div>
             <h2>길드원 현황</h2>
-            <p>한 화면에서 5명씩 바로 보입니다.</p>
+            <p>한 화면에서 보기 쉽게 정리했습니다.</p>
           </div>
           <div class="featured-controls">
             <button class="secondary-btn subtle-filter-btn" id="open-filter" type="button">필터</button>
-            <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
-            <button id="featured-prev" type="button" aria-label="이전 5명">◀</button>
-            <button id="featured-next" type="button" aria-label="다음 5명">▶</button>
+            <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">수정</button>
+            <button id="featured-prev" type="button" aria-label="이전 6명">◀</button>
+            <button id="featured-next" type="button" aria-label="다음 6명">▶</button>
           </div>
         </div>
         <div class="featured-member-list" id="featured-member-list"></div>
@@ -183,7 +180,7 @@
         <div>
           <p class="eyebrow mini">Live Guild Boss Check</p>
           <h2>실시간 토벌전 참여 확인</h2>
-          <p class="muted">길드명을 검색할 때마다 MGF에서 길드원과 토벌전 랭킹을 새로 가져와 누가 쳤는지 바로 확인합니다.</p>
+          <p class="muted">길드명을 검색할 때마다 길드원과 토벌전 랭킹을 새로 가져와 누가 쳤는지 바로 확인합니다.</p>
         </div>
         <div class="live-tobeol-form">
           <label>
@@ -195,7 +192,7 @@
             <input id="live-tobeol-server" type="number" min="1" max="99" value="4" placeholder="자동 또는 4" />
           </label>
           <button class="primary-btn" id="live-tobeol-search" type="button">실시간 조회</button>
-          <a class="secondary-btn" id="live-tobeol-source-link" href="https://mgf.gg/contents/guild_info.php?g_name=LOVELY" target="_blank" rel="noopener noreferrer">MGF 길드 열기</a>
+          <a class="secondary-btn" id="live-tobeol-source-link" href="https://mgf.gg/contents/guild_info.php?g_name=LOVELY" target="_blank" rel="noopener noreferrer">원본 열기</a>
         </div>
       </section>
 
@@ -241,7 +238,7 @@
             검색 길드
             <select id="contents-guild-select"></select>
           </label>
-          <a class="secondary-btn contents-open-link" id="contents-source-link" href="https://mgf.gg/contents/guild.php?mode=league&amp;stx=LOVELY" target="_blank" rel="noopener noreferrer">MGF에서 열기</a>
+          <a class="secondary-btn contents-open-link" id="contents-source-link" href="https://mgf.gg/contents/guild.php?mode=league&amp;stx=LOVELY" target="_blank" rel="noopener noreferrer">원본에서 열기</a>
         </div>
       </section>
 
@@ -276,28 +273,17 @@
         <article class="portal-card guide-write-card">
           <p class="eyebrow mini">Guide Board</p>
           <h2>공략 게시판</h2>
-          <p class="muted">공략글을 작성하면 게시판 서버에 바로 저장되고, 접속한 모든 사용자가 같은 글을 볼 수 있습니다.</p>
+          <p class="muted">길드 공략을 간단하게 적고 같이 볼 수 있는 게시판입니다.</p>
           <div class="board-status" id="board-status">게시판 상태 확인 중...</div>
           <button class="primary-btn" id="open-post-editor" type="button">공략 작성하기</button>
         </article>
-        <article class="portal-card soft-card" id="firebase-setup-notice">
-          <p class="eyebrow mini">Firebase Setup</p>
-          <h3>게시판 서버 설정 필요</h3>
-          <p class="muted"><code>src/firebase-config.js</code>에 Firebase Web App 설정값을 넣으면 실시간 게시판이 활성화됩니다. 설정 전에는 기존처럼 현재 브라우저에만 임시 저장됩니다.</p>
-        </article>
+
       </section>
 
       <section class="panel board-panel">
         <div class="panel-header">
           <h2>공략 목록</h2>
-          <div class="board-actions">
-            <label class="secondary-btn file-label">
-              JSON 백업 불러오기
-              <input id="import-posts" type="file" accept="application/json" hidden />
-            </label>
-            <button class="secondary-btn" id="download-posts" type="button">공략 백업 다운로드</button>
-            <button class="danger-btn" id="clear-local-posts" type="button">내 임시글 초기화</button>
-          </div>
+
         </div>
         <div class="post-list" id="post-list"></div>
       </section>
@@ -321,20 +307,18 @@
     <nav class="bottom-mobile-nav" aria-label="하단 메뉴">
       <button class="main-tab active bottom-tab" data-page="dashboard" type="button"><span>🏠</span><b>현황</b></button>
       <button class="main-tab bottom-tab" data-page="live-tobeol" type="button"><span>⚔️</span><b>토벌전</b></button>
-      <button class="main-tab bottom-tab" data-page="contents" type="button"><span>⭐</span><b>컨텐츠</b></button>
-      <button class="main-tab bottom-tab" data-page="hotdeals" type="button"><span>🎁</span><b>핫딜</b></button>
       <button class="main-tab bottom-tab" data-page="guide" type="button"><span>📜</span><b>공략</b></button>
     </nav>
 
-    <footer>
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.25.0</span>
+    <footer class="hidden-footer">
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.26.0</span>
     </footer>
   </main>
 
   <dialog class="filter-dialog" id="filter-dialog">
     <form class="filter-card" method="dialog">
       <div class="filter-card-header">
-        <strong>필터 / 검색</strong>
+        <strong>필터</strong>
         <button class="icon-btn" id="close-filter" type="button" aria-label="닫기">×</button>
       </div>
       <section class="toolbar filter-toolbar">
@@ -346,7 +330,7 @@
         </label>
         <label>
           검색
-          <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
+          <input id="keyword" type="search" placeholder="닉네임 검색" />
         </label>
         <label>
           정렬
@@ -448,6 +432,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.25.0"></script>
+  <script type="module" src="src/main.js?v=1.26.0"></script>
 </body>
 </html>

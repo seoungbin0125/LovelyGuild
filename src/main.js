@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.25.0";
+const APP_VERSION = "v1.26.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -302,11 +302,11 @@ function bindEvents() {
   });
 
   refs.featuredPrev?.addEventListener("click", () => {
-    moveFeaturedWindow(-3);
+    moveFeaturedWindow(-6);
   });
 
   refs.featuredNext?.addEventListener("click", () => {
-    moveFeaturedWindow(3);
+    moveFeaturedWindow(6);
   });
 
   refs.visualGuildFilter?.addEventListener("change", (event) => {
@@ -465,21 +465,21 @@ function renderPage() {
     refs.title.textContent = "공략 게시판";
     refs.subtitle.textContent = "길드 공략을 작성하고 공유하는 공간";
     renderPosts();
-    refs.footerText.textContent = `${APP_VERSION} · 공략을 확인하고 작성할 수 있습니다.`;
+    refs.footerText.textContent = "";
     return;
   }
 
   if (state.page === "links") {
     refs.title.textContent = "길드 링크";
     refs.subtitle.textContent = "길드 주요 링크 바로가기";
-    refs.footerText.textContent = `${APP_VERSION} · 외부 링크는 새 창으로 열립니다.`;
+    refs.footerText.textContent = "";
     return;
   }
 
   if (state.page === "rest") {
     refs.title.textContent = "휴식";
     refs.subtitle.textContent = "게임 1 · 게임 2";
-    refs.footerText.textContent = `${APP_VERSION} · 숨김 페이지입니다.`;
+    refs.footerText.textContent = "";
   }
 }
 
@@ -591,9 +591,7 @@ function renderGuildContentsPage() {
   renderGuildContentsGrid(modeData);
 
   const count = Number(modeData?.matchCount ?? modeData?.guilds?.length ?? 0);
-  refs.footerText.textContent = modeData
-    ? `${contentModeLabel(state.contentsMode)} · ${state.contentsGuild} 검색 결과 ${count}개 길드 표시 중 · ${state.guildContents?.capturedAt || "수집일 미상"}`
-    : `${state.contentsGuild} ${contentModeLabel(state.contentsMode)} 데이터가 아직 없습니다. MGF에서 열기로 확인하거나 npm run collect:contents를 실행하세요.`;
+  refs.footerText.textContent = "";
 }
 
 function renderGuildContentsSummary(bundle, modeData) {
@@ -608,7 +606,7 @@ function renderGuildContentsSummary(bundle, modeData) {
       <button class="contents-summary-card ${isActive ? "active" : ""}" data-content-summary="${escapeAttr(mode)}" type="button">
         <span>${contentModeEmoji(mode)} ${escapeHtml(contentModeLabel(mode))}</span>
         <strong>${count ? `${count}개 길드` : "데이터 없음"}</strong>
-        <small>${topGuild ? `${escapeHtml(topGuild.name)} · ${escapeHtml(topGuild.powerText || "-")}` : "MGF에서 확인 가능"}</small>
+        <small>${topGuild ? `${escapeHtml(topGuild.name)} · ${escapeHtml(topGuild.powerText || "-")}` : "원본에서 확인 가능"}</small>
       </button>
     `;
   }).join("");
@@ -684,7 +682,7 @@ function getSelectedGuildContentBundle() {
 
 function normalizeGuildContents(value) {
   if (!value || !Array.isArray(value.guilds)) {
-    return { capturedAt: "", source: "MGF.GG", guilds: [] };
+    return { capturedAt: "", source: "원본", guilds: [] };
   }
   return value;
 }
@@ -702,15 +700,15 @@ function makeGuildContentsUrl(mode, keyword) {
 }
 
 function renderLiveTobeolPage() {
-  refs.title.textContent = "실시간 토벌전 체크";
-  refs.subtitle.textContent = "길드명 검색으로 참여/미참여를 즉시 확인";
+  refs.title.textContent = "";
+  refs.subtitle.textContent = "";
 
   if (refs.liveTobeolGuild && !refs.liveTobeolGuild.value) refs.liveTobeolGuild.value = state.liveTobeolGuild || "lovely";
   if (refs.liveTobeolServer && !refs.liveTobeolServer.value) refs.liveTobeolServer.value = state.liveTobeolServer || "4";
   updateLiveTobeolSourceLink();
   renderLiveTobeolResults();
 
-  refs.footerText.textContent = `${APP_VERSION} · 실시간 토벌전 조회는 검색할 때마다 MGF에서 새로 가져옵니다.`;
+  refs.footerText.textContent = "";
 }
 
 async function searchLiveTobeol() {
@@ -1026,8 +1024,8 @@ function render() {
   const guilds = getGuilds();
   const selectedGuildText = state.guildFilter === "all" ? guilds.join(" · ") : state.guildFilter;
 
-  refs.title.textContent = "Lovely 길드 포털";
-  refs.subtitle.textContent = `${selectedGuildText || "LOVELY"} 현황 · 전투력과 토벌전을 한 화면에서 보기`;
+  refs.title.textContent = "";
+  refs.subtitle.textContent = "";
 
   renderSummary();
   renderFeaturedMembers();
@@ -1036,8 +1034,8 @@ function render() {
   if (state.page !== "dashboard") return;
 
   const editText = data.manualAppliedCount > 0 ? ` · 수정 ${data.manualAppliedCount}건 반영` : "";
-  const sourceText = data.dataSource === "MGF guild_info" ? " · 기준: MGF 길드 상세" : "";
-  refs.footerText.textContent = `${APP_VERSION} · ${selectedGuildText || "LOVELY"} · ${data.capturedDate || "-"} 수집${sourceText}${editText}`;
+  const sourceText = data.dataSource === "MGF guild_info" ? "" : "";
+  refs.footerText.textContent = "";
 }
 
 function getComparisonDateText(data, guildFilter) {
@@ -1111,7 +1109,7 @@ function renderCharactersPage() {
   renderCharacterGrid(members);
 
   const editText = data.manualAppliedCount > 0 ? ` · 수정 ${data.manualAppliedCount}건 반영` : "";
-  refs.footerText.textContent = `${APP_VERSION} · ${members.length}명 표시 중 · 현재 ${data.capturedDate || "-"} 수집${editText}`;
+  refs.footerText.textContent = "";
 }
 
 function getVisualFilteredMembers() {
@@ -3092,7 +3090,7 @@ function syncBoardUi(status, message) {
   }
 
   if (refs.clearLocalPosts) {
-    refs.clearLocalPosts.textContent = state.firebaseBoard?.enabled ? "게시글은 삭제 버튼으로 관리" : "내 임시글 초기화";
+    refs.clearLocalPosts.textContent = state.firebaseBoard?.enabled ? "" : "";
     refs.clearLocalPosts.disabled = Boolean(state.firebaseBoard?.enabled);
   }
 }
@@ -3568,7 +3566,7 @@ function renderFeaturedMembers() {
     return;
   }
 
-  const pageSize = 3;
+  const pageSize = 6;
   const maxStart = Math.max(0, Math.floor((members.length - 1) / pageSize) * pageSize);
   if (state.featuredStartIndex > maxStart) state.featuredStartIndex = maxStart;
   const windowMembers = members.slice(state.featuredStartIndex, state.featuredStartIndex + pageSize);
@@ -3592,16 +3590,12 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
         <span class="featured-avatar-fallback">🌸</span>
       </div>
       <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
-      <small class="featured-job">${escapeHtml(member.job || "-")}</small>
-      <span class="featured-pill ${participationClass}">${participationText}</span>
-      <div class="featured-mini-score power">
-        <span>P</span>
+      <small class="featured-level">Lv.${escapeHtml(member.level || "-")}</small>
+      <div class="featured-power-box">
+        <span>전투력</span>
         <strong>${escapeHtml(shortNumberKorean(member.powerValue || 0, member.powerText))}</strong>
       </div>
-      <div class="featured-mini-score tobeol">
-        <span>T</span>
-        <strong>${escapeHtml(shortNumberKorean(member.tobeolValue || 0, member.tobeolText))}</strong>
-      </div>
+      <span class="featured-pill ${participationClass}">${participationText}</span>
     </article>
   `;
 }
@@ -3621,7 +3615,7 @@ function shortNumberKorean(value, fallbackText = "-") {
   return `${Math.floor(num)}`;
 }
 
-// src/main.js 의 renderTable 함수를 이렇게 수정해보세요// src/main.js 의 renderTable 함수를 이렇게 수정해보세요
+// src/main.js renderTable
 function renderTable() {
   if (!refs.tableHead || !refs.tableBody || !refs.panelTitle || !refs.panelDesc) return;
   const members = getFilteredMembers();
