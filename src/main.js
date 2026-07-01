@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.24.0";
+const APP_VERSION = "v1.25.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -173,6 +173,9 @@ const refs = {
   footerText: document.getElementById("footer-text"),
   editDialog: document.getElementById("edit-dialog"),
   openEditor: document.getElementById("open-editor"),
+  filterDialog: document.getElementById("filter-dialog"),
+  openFilter: document.getElementById("open-filter"),
+  closeFilter: document.getElementById("close-filter"),
   openEditorGuide: document.getElementById("open-editor-guide"),
   openActionsRefresh: document.getElementById("open-actions-refresh"),
   closeEditor: document.getElementById("close-editor"),
@@ -271,6 +274,15 @@ function bindEvents() {
     });
   });
 
+
+  refs.openFilter?.addEventListener("click", () => {
+    if (refs.filterDialog?.showModal) refs.filterDialog.showModal();
+  });
+
+  refs.closeFilter?.addEventListener("click", () => {
+    refs.filterDialog?.close();
+  });
+
   refs.guildFilter?.addEventListener("change", (event) => {
     state.guildFilter = event.target.value;
     state.featuredStartIndex = 0;
@@ -290,11 +302,11 @@ function bindEvents() {
   });
 
   refs.featuredPrev?.addEventListener("click", () => {
-    moveFeaturedWindow(-5);
+    moveFeaturedWindow(-3);
   });
 
   refs.featuredNext?.addEventListener("click", () => {
-    moveFeaturedWindow(5);
+    moveFeaturedWindow(3);
   });
 
   refs.visualGuildFilter?.addEventListener("change", (event) => {
@@ -3556,7 +3568,7 @@ function renderFeaturedMembers() {
     return;
   }
 
-  const pageSize = 5;
+  const pageSize = 3;
   const maxStart = Math.max(0, Math.floor((members.length - 1) / pageSize) * pageSize);
   if (state.featuredStartIndex > maxStart) state.featuredStartIndex = maxStart;
   const windowMembers = members.slice(state.featuredStartIndex, state.featuredStartIndex + pageSize);

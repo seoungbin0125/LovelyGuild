@@ -3,26 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.24.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.24.0" />
+  <title>Lovely 길드 포털 v1.25.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.25.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
       <div>
-        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.24.0</span></p>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.25.0</span></p>
         <h1 id="title">Lovely 길드 포털</h1>
-        <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 길드 컨텐츠</p>
+        <p id="subtitle" class="hidden-subtitle"></p>
       </div>
     </section>
 
     <section class="top-banner-nav">
       <div class="lovely-banner">
-        <div class="lovely-banner-copy">
-          <span class="cover-chip">Scania 4</span>
-          <strong>LOVELY 길드</strong>
-          <p>따뜻한 인연, 함께 만드는 이야기 ♥</p>
-        </div>
       </div>
       <div class="main-nav desktop-nav" aria-label="메인 메뉴">
         <button class="main-tab active" data-page="dashboard" type="button">현황</button>
@@ -45,6 +40,7 @@
             <p>한 화면에서 5명씩 바로 보입니다.</p>
           </div>
           <div class="featured-controls">
+            <button class="secondary-btn subtle-filter-btn" id="open-filter" type="button">필터</button>
             <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
             <button id="featured-prev" type="button" aria-label="이전 5명">◀</button>
             <button id="featured-next" type="button" aria-label="다음 5명">▶</button>
@@ -52,33 +48,6 @@
         </div>
         <div class="featured-member-list" id="featured-member-list"></div>
       </section>
-
-      <details class="filter-drawer">
-        <summary>필터 / 검색 열기</summary>
-        <section class="toolbar">
-          <label>
-            길드
-            <select id="guild-filter">
-              <option value="all">전체</option>
-            </select>
-          </label>
-          <label>
-            검색
-            <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
-          </label>
-          <label>
-            정렬
-            <select id="sort">
-              <option value="powerGrowth">전투력 성장 높은순</option>
-              <option value="power">현재 전투력 높은순</option>
-              <option value="tobeolGrowth">토벌전 성장 높은순</option>
-              <option value="tobeol">토벌전 점수 높은순</option>
-              <option value="level">레벨 높은순</option>
-              <option value="rank">길드 순위순</option>
-            </select>
-          </label>
-        </section>
-      </details>
     </section>
 
 
@@ -351,16 +320,48 @@
 
     <nav class="bottom-mobile-nav" aria-label="하단 메뉴">
       <button class="main-tab active bottom-tab" data-page="dashboard" type="button"><span>🏠</span><b>현황</b></button>
-      <button class="main-tab bottom-tab" data-page="live-tobeol" type="button"><span>⚔️</span><b>실시간</b></button>
+      <button class="main-tab bottom-tab" data-page="live-tobeol" type="button"><span>⚔️</span><b>토벌전</b></button>
       <button class="main-tab bottom-tab" data-page="contents" type="button"><span>⭐</span><b>컨텐츠</b></button>
       <button class="main-tab bottom-tab" data-page="hotdeals" type="button"><span>🎁</span><b>핫딜</b></button>
       <button class="main-tab bottom-tab" data-page="guide" type="button"><span>📜</span><b>공략</b></button>
     </nav>
 
     <footer>
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.24.0</span>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.25.0</span>
     </footer>
   </main>
+
+  <dialog class="filter-dialog" id="filter-dialog">
+    <form class="filter-card" method="dialog">
+      <div class="filter-card-header">
+        <strong>필터 / 검색</strong>
+        <button class="icon-btn" id="close-filter" type="button" aria-label="닫기">×</button>
+      </div>
+      <section class="toolbar filter-toolbar">
+        <label>
+          길드
+          <select id="guild-filter">
+            <option value="all">전체</option>
+          </select>
+        </label>
+        <label>
+          검색
+          <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
+        </label>
+        <label>
+          정렬
+          <select id="sort">
+            <option value="powerGrowth">전투력 성장 높은순</option>
+            <option value="power">현재 전투력 높은순</option>
+            <option value="tobeolGrowth">토벌전 성장 높은순</option>
+            <option value="tobeol">토벌전 점수 높은순</option>
+            <option value="level">레벨 높은순</option>
+            <option value="rank">길드 순위순</option>
+          </select>
+        </label>
+      </section>
+    </form>
+  </dialog>
 
   <dialog class="edit-dialog" id="edit-dialog">
     <form class="edit-card" method="dialog">
@@ -447,6 +448,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.24.0"></script>
+  <script type="module" src="src/main.js?v=1.25.0"></script>
 </body>
 </html>

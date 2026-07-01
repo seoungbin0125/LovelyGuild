@@ -15,4 +15,4 @@ rsync -av --delete \
   "$SOURCE_DIR/" "$TARGET_DIR/"
 
 echo "적용 완료: $TARGET_DIR"
-echo "버전: v1.24.0"
+echo "버전: v1.25.0"
