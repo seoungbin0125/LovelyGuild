@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.23.0";
+const APP_VERSION = "v1.24.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -237,7 +237,9 @@ async function init() {
     initVirtualLobbyClient();
     renderPage();
   } catch (error) {
-    refs.tableBody.innerHTML = `<tr><td colspan="99" class="empty">${escapeHtml(error.message)}</td></tr>`;
+    if (refs.tableBody) {
+      refs.tableBody.innerHTML = `<tr><td colspan="99" class="empty">${escapeHtml(error.message)}</td></tr>`;
+    }
     refs.footerText.textContent = `${APP_VERSION} · data/latest.json 파일을 확인해주세요.`;
   }
 }
@@ -255,7 +257,7 @@ function bindEvents() {
   refs.mainTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       state.page = tab.dataset.page;
-      refs.mainTabs.forEach((item) => item.classList.toggle("active", item === tab));
+      refs.mainTabs.forEach((item) => item.classList.toggle("active", item.dataset.page === state.page));
       renderPage();
     });
   });
@@ -1068,8 +1070,7 @@ function renderSummary() {
     { label: "길드원", value: `${summary.memberCount || 0}명`, icon: "👥", tone: "primary" },
     { label: "총 전투력", value: formatKoreanPower(summary.totalPowerValue || 0), icon: "⚡", tone: "featured" },
     { label: "총 토벌전", value: formatKoreanPower(summary.totalTobeolValue || 0), icon: "🏹", tone: "accent" },
-    { label: "평균 전투력", value: formatKoreanPower(avgPower || 0), icon: "✨", tone: "soft" },
-    { label: "평균 토벌전", value: formatKoreanPower(avgTobeol || 0), icon: "🎯", tone: "soft" }
+    { label: "평균 전투력", value: formatKoreanPower(avgPower || 0), icon: "✨", tone: "soft" }
   ];
 
   refs.summaryGrid.innerHTML = cards.map((card) => `
@@ -3569,7 +3570,7 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
   const imageUrl = getCharacterImageUrl(member.nickname);
   const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
   const participationClass = Number(member.tobeolValue || 0) > 0 ? "is-hit" : "is-missed";
-  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참여";
+  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참";
 
   return `
     <article class="featured-member-item">
@@ -3578,25 +3579,39 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
         <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
         <span class="featured-avatar-fallback">🌸</span>
       </div>
-      <div class="featured-main">
-        <strong>${escapeHtml(member.nickname || "-")}</strong>
-        <small>${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</small>
-      </div>
+      <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
+      <small class="featured-job">${escapeHtml(member.job || "-")}</small>
       <span class="featured-pill ${participationClass}">${participationText}</span>
-      <div class="featured-power-box">
-        <span>전투력</span>
-        <strong>${escapeHtml(member.powerText || formatKoreanPower(member.powerValue))}</strong>
+      <div class="featured-mini-score power">
+        <span>P</span>
+        <strong>${escapeHtml(shortNumberKorean(member.powerValue || 0, member.powerText))}</strong>
       </div>
-      <div class="featured-score-box">
-        <span>토벌전</span>
-        <strong>${escapeHtml(member.tobeolText || formatKoreanPower(member.tobeolValue))}</strong>
+      <div class="featured-mini-score tobeol">
+        <span>T</span>
+        <strong>${escapeHtml(shortNumberKorean(member.tobeolValue || 0, member.tobeolText))}</strong>
       </div>
     </article>
   `;
 }
 
-// src/main.js 의 renderTable 함수를 이렇게 수정해보세요
+function shortNumberKorean(value, fallbackText = "-") {
+  if (!Number.isFinite(Number(value)) || Number(value) <= 0) return fallbackText || "0";
+  const num = Number(value);
+  if (num >= 1000000000000) {
+    return `${Math.floor(num / 1000000000000)}조`;
+  }
+  if (num >= 100000000) {
+    return `${Math.floor(num / 100000000)}억`;
+  }
+  if (num >= 10000) {
+    return `${Math.floor(num / 10000)}만`;
+  }
+  return `${Math.floor(num)}`;
+}
+
+// src/main.js 의 renderTable 함수를 이렇게 수정해보세요// src/main.js 의 renderTable 함수를 이렇게 수정해보세요
 function renderTable() {
+  if (!refs.tableHead || !refs.tableBody || !refs.panelTitle || !refs.panelDesc) return;
   const members = getFilteredMembers();
   const table = getTableSpec("power");
 

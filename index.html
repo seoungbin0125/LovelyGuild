@@ -3,26 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.23.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.23.0" />
+  <title>Lovely 길드 포털 v1.24.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.24.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
       <div>
-        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.23.0</span></p>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.24.0</span></p>
         <h1 id="title">Lovely 길드 포털</h1>
-        <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 캐릭터 · 길드 컨텐츠</p>
+        <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 길드 컨텐츠</p>
       </div>
-      <div class="hero-actions main-nav" aria-label="메인 메뉴">
+    </section>
+
+    <section class="top-banner-nav">
+      <div class="lovely-banner">
+        <div class="lovely-banner-copy">
+          <span class="cover-chip">Scania 4</span>
+          <strong>LOVELY 길드</strong>
+          <p>따뜻한 인연, 함께 만드는 이야기 ♥</p>
+        </div>
+      </div>
+      <div class="main-nav desktop-nav" aria-label="메인 메뉴">
         <button class="main-tab active" data-page="dashboard" type="button">현황</button>
-                <button class="main-tab" data-page="live-tobeol" type="button">실시간 토벌</button>
+        <button class="main-tab" data-page="live-tobeol" type="button">실시간 토벌</button>
         <button class="main-tab" data-page="contents" type="button">길드 컨텐츠</button>
         <button class="main-tab" data-page="hotdeals" type="button">핫딜</button>
         <button class="main-tab" data-page="guide" type="button">공략</button>
         <button class="main-tab" data-page="links" type="button">링크</button>
       </div>
     </section>
+
     <section class="content-page active" id="page-dashboard">
       <section class="summary-grid" id="summary-grid"></section>
 
@@ -31,9 +42,10 @@
         <div class="featured-header">
           <div>
             <h2>길드원 현황</h2>
-            <p>한 화면에서 많이 보이도록 5명씩 표시합니다.</p>
+            <p>한 화면에서 5명씩 바로 보입니다.</p>
           </div>
           <div class="featured-controls">
+            <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
             <button id="featured-prev" type="button" aria-label="이전 5명">◀</button>
             <button id="featured-next" type="button" aria-label="다음 5명">▶</button>
           </div>
@@ -67,23 +79,6 @@
           </label>
         </section>
       </details>
-
-      <section class="panel mini-panel">
-        <div class="panel-header">
-          <div>
-            <h2 id="panel-title">전체 카드 보기</h2>
-            <p id="panel-desc">아래 카드 영역은 좌우로 넘기며 더 볼 수 있습니다.</p>
-          </div>
-          <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
-        </div>
-        <div class="table-wrap" aria-label="길드원 데이터 표">
-          <table>
-            <thead id="table-head"></thead>
-            <tbody id="table-body"></tbody>
-          </table>
-        </div>
-        <div class="mobile-card-list" id="mobile-card-list" aria-label="길드원 데이터 카드 목록"></div>
-      </section>
     </section>
 
 
@@ -354,8 +349,16 @@
       </section>
     </section>
 
+    <nav class="bottom-mobile-nav" aria-label="하단 메뉴">
+      <button class="main-tab active bottom-tab" data-page="dashboard" type="button"><span>🏠</span><b>현황</b></button>
+      <button class="main-tab bottom-tab" data-page="live-tobeol" type="button"><span>⚔️</span><b>실시간</b></button>
+      <button class="main-tab bottom-tab" data-page="contents" type="button"><span>⭐</span><b>컨텐츠</b></button>
+      <button class="main-tab bottom-tab" data-page="hotdeals" type="button"><span>🎁</span><b>핫딜</b></button>
+      <button class="main-tab bottom-tab" data-page="guide" type="button"><span>📜</span><b>공략</b></button>
+    </nav>
+
     <footer>
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.23.0</span>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.24.0</span>
     </footer>
   </main>
 
@@ -444,6 +447,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.23.0"></script>
+  <script type="module" src="src/main.js?v=1.24.0"></script>
 </body>
 </html>

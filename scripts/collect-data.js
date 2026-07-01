@@ -148,7 +148,7 @@ async function run() {
   const latest = {
     ok: true,
     version: 5,
-    appVersion: "v1.23.0",
+    appVersion: "v1.24.0",
     guilds: guildNames,
     guild: guildNames.join(" · "),
     capturedDate: today,
