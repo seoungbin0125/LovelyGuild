@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.19.0";
+const APP_VERSION = "v1.20.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -815,19 +815,25 @@ function renderLiveTobeolResults() {
 
 function renderLiveTobeolMember(member, type) {
   const isHit = type === "hit";
+  const imageUrl = getCharacterImageUrl(member.nickname);
+  const statusText = isHit ? "참여" : "미참여";
   return `
     <div class="live-member ${isHit ? "is-hit" : "is-missed"}">
       <div class="live-member-main">
-        <span class="live-rank">#${escapeHtml(member.rank || "-")}</span>
-        <div>
+        <span class="live-rank ${member.rank && Number(member.rank) <= 3 ? `top-${escapeAttr(String(member.rank))}` : ""}">#${escapeHtml(member.rank || "-")}</span>
+        <div class="live-avatar-wrap">
+          <img class="live-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
+          <span class="live-avatar-fallback">🌸</span>
+        </div>
+        <div class="live-member-namebox">
           <strong>${escapeHtml(member.nickname || "-")}</strong>
           <small>${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</small>
         </div>
       </div>
-      <div class="live-member-score">
-        <span>${isHit ? "토벌 점수" : "상태"}</span>
-        <strong>${isHit ? escapeHtml(member.tobeolText || "0") : "미참여"}</strong>
-        ${isHit && member.tobeolRank ? `<small>토벌 랭킹 #${escapeHtml(member.tobeolRank)}</small>` : ""}
+      <div class="live-member-score ${isHit ? "score-hit" : "score-missed"}">
+        <span class="live-state-pill ${isHit ? "is-hit" : "is-missed"}">${statusText}</span>
+        <strong>${isHit ? escapeHtml(member.tobeolText || "0") : "기록 없음"}</strong>
+        ${isHit && member.tobeolRank ? `<small>토벌 랭킹 #${escapeHtml(member.tobeolRank)}</small>` : `<small>이번 주 점수 미확인</small>`}
       </div>
     </div>
   `;
@@ -3555,19 +3561,27 @@ function renderMemberCard(member, index) {
   const rank = member.rank ? `#${escapeHtml(member.rank)}` : `#${index + 1}`;
   const manualBadge = member.isManual ? `<span class="manual-badge">수정</span>` : "";
   const statusBadge = renderMemberStatusBadge(member);
+  const imageUrl = getCharacterImageUrl(member.nickname);
+  const scoreClass = isTobeol ? "score-pink" : "score-indigo";
 
   return `
-    <article class="member-card ${member.isManual ? "manual-card" : ""}">
+    <article class="member-card ${member.isManual ? "manual-card" : ""} ${isTobeol ? "member-card-tobeol" : "member-card-power"}">
       <div class="member-card-head">
         <div class="member-badges">
           <span class="member-rank-chip">${rank}</span>
           ${renderGuild(member)}
         </div>
-        <div class="member-name-block">
-          <div class="member-name">${escapeHtml(member.nickname || "-")} ${manualBadge} ${statusBadge}</div>
-          <div class="member-sub">${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</div>
+        <div class="member-hero-row">
+          <div class="member-avatar-wrap">
+            <img class="member-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
+            <span class="member-avatar-fallback">✨</span>
+          </div>
+          <div class="member-name-block">
+            <div class="member-name">${escapeHtml(member.nickname || "-")} ${manualBadge} ${statusBadge}</div>
+            <div class="member-sub">${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</div>
+          </div>
         </div>
-        <div class="member-highlight">
+        <div class="member-highlight ${scoreClass}">
           <span>${escapeHtml(currentLabel)}</span>
           <strong>${escapeHtml(currentValue)}</strong>
         </div>
