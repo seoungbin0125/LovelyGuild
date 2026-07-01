@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lovely 길드 포털 v1.16.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.16.0" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.16.0</span></p>
+        <h1 id="title">Lovely 길드 포털</h1>
+        <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 캐릭터 · 길드 컨텐츠</p>
+      </div>
+      <div class="hero-actions main-nav" aria-label="메인 메뉴">
+        <button class="main-tab active" data-page="dashboard" type="button">현황</button>
+        <button class="main-tab" data-page="characters" type="button">캐릭터</button>
+        <button class="main-tab" data-page="live-tobeol" type="button">실시간 토벌</button>
+        <button class="main-tab" data-page="contents" type="button">길드 컨텐츠</button>
+        <button class="main-tab" data-page="hotdeals" type="button">핫딜</button>
+        <button class="main-tab" data-page="guide" type="button">공략</button>
+        <button class="main-tab" data-page="links" type="button">링크</button>
+      </div>
+    </section>
+
+    <section class="content-page active" id="page-dashboard">
+      <section class="dashboard-tabs">
+        <div class="hero-actions">
+          <button class="tab active" data-tab="power" type="button">전투력</button>
+          <button class="tab" data-tab="tobeol" type="button">토벌전</button>
+          <button class="edit-open-btn" id="open-editor" type="button">점수 수정</button>
+        </div>
+      </section>
+
+      <section class="summary-grid" id="summary-grid"></section>
+
+
+      <section class="toolbar">
+        <label>
+          길드
+          <select id="guild-filter">
+            <option value="all">전체</option>
+          </select>
+        </label>
+        <label>
+          검색
+          <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
+        </label>
+        <label>
+          정렬
+          <select id="sort">
+            <option value="powerGrowth">전투력 성장 높은순</option>
+            <option value="power">현재 전투력 높은순</option>
+            <option value="tobeolGrowth">토벌전 성장 높은순</option>
+            <option value="tobeol">토벌전 점수 높은순</option>
+            <option value="level">레벨 높은순</option>
+            <option value="rank">길드 순위순</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2 id="panel-title">전투력 성장</h2>
+          <p id="panel-desc">최신 수집 데이터 기준입니다.</p>
+        </div>
+        <div class="table-wrap" aria-label="길드원 데이터 표">
+          <table>
+            <thead id="table-head"></thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+        <div class="mobile-card-list" id="mobile-card-list" aria-label="길드원 데이터 카드 목록"></div>
+      </section>
+    </section>
+
+
+
+    <section class="content-page" id="page-characters">
+      <section class="visual-hero">
+        <div>
+          <p class="eyebrow mini">Character Gallery</p>
+          <h2>길드 캐릭터 한눈에 보기</h2>
+          <p class="muted">MGF 캐릭터 이미지를 불러와 전투력, 토벌전 점수, 변화량을 카드로 같이 보여줍니다.</p>
+        </div>
+        <div class="visual-stats" id="visual-stats"></div>
+      </section>
+
+      <section class="toolbar visual-toolbar">
+        <label>
+          길드
+          <select id="visual-guild-filter">
+            <option value="all">전체</option>
+          </select>
+        </label>
+        <label>
+          검색
+          <input id="visual-keyword" type="search" placeholder="닉네임 / 직업 / 길드" />
+        </label>
+        <label>
+          정렬
+          <select id="visual-sort">
+            <option value="powerGrowth">전투력 변화 높은순</option>
+            <option value="power">현재 전투력 높은순</option>
+            <option value="tobeolGrowth">토벌전 변화 높은순</option>
+            <option value="tobeol">토벌전 점수 높은순</option>
+            <option value="level">레벨 높은순</option>
+            <option value="rank">길드 순위순</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="visual-overview" id="visual-overview"></section>
+      <section class="character-grid" id="character-grid" aria-label="길드 캐릭터 이미지 목록"></section>
+    </section>
+
+
+    <section class="content-page" id="page-virtual">
+      <section class="virtual-layout">
+        <article class="virtual-card virtual-intro">
+          <p class="eyebrow mini">Virtual Plaza</p>
+          <h2>길드 버츄얼 광장</h2>
+          <p class="muted">메이플 느낌의 긴 2D 광장에서 캐릭터를 움직이고, 채팅과 스킬 장난을 할 수 있습니다.</p>
+          <div class="virtual-status" id="virtual-status">광장 연결 확인 중...</div>
+
+          <label class="virtual-picker">
+            캐릭터 선택
+            <select id="virtual-character-select"></select>
+          </label>
+
+          <div class="virtual-selected">
+            <strong id="virtual-selected-name">캐릭터 선택 전</strong>
+            <div>
+              <span>전투력 <b id="virtual-power">-</b></span>
+              <span>체력 <b id="virtual-hp">-</b></span>
+              <span>상태 <b id="virtual-state">입장 전</b></span>
+              <span>토벌전 <b id="virtual-tobeol">-</b></span>
+            </div>
+          </div>
+
+          <div class="virtual-actions">
+            <button class="primary-btn" id="virtual-join" type="button">광장 입장</button>
+            <button class="secondary-btn" id="virtual-random" type="button">맵 랜덤 이동</button>
+            <button class="danger-btn" id="virtual-leave" type="button" disabled>나가기</button>
+          </div>
+        </article>
+
+        <section class="virtual-stage-card">
+          <div class="virtual-stage-top">
+            <div>
+              <p class="eyebrow mini">Guild Plaza</p>
+              <h2>헤네시스 광장풍 놀이터</h2>
+            </div>
+            <span class="online-pill">접속 <strong id="virtual-online-count">0명</strong></span>
+          </div>
+
+          <div class="virtual-stage" id="virtual-stage" aria-label="캐릭터 광장">
+            <div class="stage-decoration deco-1"></div>
+            <div class="stage-decoration deco-2"></div>
+            <div class="stage-skyline" aria-hidden="true"></div>
+            <div class="stage-platform platform-1" aria-hidden="true"></div>
+            <div class="stage-platform platform-2" aria-hidden="true"></div>
+            <div class="stage-platform platform-3" aria-hidden="true"></div>
+            <div class="stage-road"></div>
+            <div class="stage-jail" aria-hidden="true">
+              <span>감옥</span>
+              <small>5초 격리</small>
+            </div>
+            <div class="virtual-avatars" id="virtual-avatars"></div>
+            <p class="virtual-hint" id="virtual-hint">캐릭터를 선택하고 입장하면 이동할 수 있습니다.</p>
+          </div>
+
+          <div class="virtual-controls" aria-label="캐릭터 이동 버튼">
+            <button type="button" data-virtual-move="left">◀</button>
+            <button type="button" data-virtual-move="up">점프</button>
+            <button type="button" data-virtual-move="right">▶</button>
+            <button type="button" data-virtual-move="down">착지</button>
+          </div>
+
+          <div class="virtual-skill-pad" aria-label="광장 스킬 버튼">
+            <button class="skill-btn skill-attack" id="virtual-attack" type="button" data-virtual-skill="slash" data-skill-label="공격" disabled><span>⚔️</span><b>공격</b></button>
+            <button class="skill-btn" type="button" data-virtual-skill="dash" data-skill-label="돌진" disabled><span>💨</span><b>돌진</b></button>
+            <button class="skill-btn" type="button" data-virtual-skill="heal" data-skill-label="회복" disabled><span>💚</span><b>회복</b></button>
+            <button class="skill-btn" type="button" data-virtual-skill="shield" data-skill-label="실드" disabled><span>🛡️</span><b>실드</b></button>
+          </div>
+        </section>
+
+        <aside class="virtual-chat-panel">
+          <div class="panel-header compact">
+            <div>
+              <h2>광장 채팅</h2>
+              <p>입장한 캐릭터 이름으로 메시지가 표시됩니다.</p>
+            </div>
+          </div>
+          <div class="virtual-chat-list" id="virtual-chat-list"></div>
+          <div class="virtual-chat-form">
+            <input id="virtual-chat-input" type="text" maxlength="120" placeholder="메시지 입력" disabled />
+            <button class="primary-btn" id="virtual-chat-send" type="button" disabled>전송</button>
+          </div>
+        </aside>
+      </section>
+    </section>
+
+
+    <section class="content-page" id="page-live-tobeol">
+      <section class="live-tobeol-hero">
+        <div>
+          <p class="eyebrow mini">Live Guild Boss Check</p>
+          <h2>실시간 토벌전 참여 확인</h2>
+          <p class="muted">길드명을 검색할 때마다 MGF에서 길드원과 토벌전 랭킹을 새로 가져와 누가 쳤는지 바로 확인합니다.</p>
+        </div>
+        <div class="live-tobeol-form">
+          <label>
+            길드명
+            <input id="live-tobeol-guild" type="search" value="lovely" placeholder="예: lovely" />
+          </label>
+          <label>
+            서버 번호
+            <input id="live-tobeol-server" type="number" min="1" max="99" value="4" placeholder="자동 또는 4" />
+          </label>
+          <button class="primary-btn" id="live-tobeol-search" type="button">실시간 조회</button>
+          <a class="secondary-btn" id="live-tobeol-source-link" href="https://mgf.gg/contents/guild_info.php?g_name=LOVELY" target="_blank" rel="noopener noreferrer">MGF 길드 열기</a>
+        </div>
+      </section>
+
+      <section class="live-tobeol-notice">
+        <strong>검색할 때마다 최신 토벌전 점수를 다시 확인합니다.</strong>
+        <p>미참여 인원과 참여 인원을 바로 나눠서 보여줍니다.</p>
+      </section>
+
+      <section class="live-tobeol-summary" id="live-tobeol-summary"></section>
+
+      <section class="live-tobeol-columns">
+        <article class="live-tobeol-panel missed">
+          <div class="panel-header compact">
+            <div>
+              <h2>아직 안 친 사람</h2>
+              <p>현재 토벌전 점수 0점 또는 랭킹 미매칭</p>
+            </div>
+          </div>
+          <div class="live-tobeol-list" id="live-tobeol-miss-list"></div>
+        </article>
+        <article class="live-tobeol-panel hit">
+          <div class="panel-header compact">
+            <div>
+              <h2>친 사람</h2>
+              <p>토벌전 랭킹에서 점수가 확인된 길드원</p>
+            </div>
+          </div>
+          <div class="live-tobeol-list" id="live-tobeol-hit-list"></div>
+        </article>
+      </section>
+    </section>
+
+
+    <section class="content-page" id="page-contents">
+      <section class="contents-hero">
+        <div>
+          <p class="eyebrow mini">Guild Contents</p>
+          <h2>길드 컨텐츠 매칭 현황</h2>
+          <p class="muted">대항전, 수련장, 보스대전을 한 화면에서 빠르게 확인합니다. 기본 검색어는 LOVELY입니다.</p>
+        </div>
+        <div class="contents-actions">
+          <label>
+            검색 길드
+            <select id="contents-guild-select"></select>
+          </label>
+          <a class="secondary-btn contents-open-link" id="contents-source-link" href="https://mgf.gg/contents/guild.php?mode=league&amp;stx=LOVELY" target="_blank" rel="noopener noreferrer">MGF에서 열기</a>
+        </div>
+      </section>
+
+      <section class="contents-tabs" aria-label="길드 컨텐츠 종류">
+        <button class="contents-tab active" data-content-mode="league" type="button">⚔️ 대항전</button>
+        <button class="contents-tab" data-content-mode="training" type="button">🥋 수련장</button>
+        <button class="contents-tab" data-content-mode="boss" type="button">👑 보스대전</button>
+      </section>
+
+      <section class="contents-summary" id="contents-summary"></section>
+      <section class="contents-grid" id="contents-grid" aria-label="길드 컨텐츠 매칭 목록"></section>
+    </section>
+
+    <section class="content-page" id="page-hotdeals">
+      <section class="hotdeal-hero">
+        <div>
+          <p class="eyebrow mini">Gift Card Deals</p>
+          <h2>기프트카드 할인 소식</h2>
+          <p class="muted">아카라이브 핫딜 게시판에서 기프트카드 키워드로 수집한 글을 보여줍니다. 마감 여부가 애매하면 최신 5개 기준으로 표시합니다.</p>
+        </div>
+        <div class="hotdeal-actions">
+          <a class="secondary-btn hotdeal-open-link" id="hotdeal-source-link" href="https://arca.live/b/hotdeal?target=all&amp;keyword=%EA%B8%B0%ED%94%84%ED%8A%B8%EC%B9%B4%EB%93%9C" target="_blank" rel="noopener noreferrer">원본 방 열기</a>
+        </div>
+      </section>
+
+      <section class="hotdeal-summary" id="hotdeal-summary"></section>
+      <section class="hotdeal-grid" id="hotdeal-grid" aria-label="기프트카드 할인 글 목록"></section>
+    </section>
+
+    <section class="content-page" id="page-guide">
+      <section class="portal-grid two-col">
+        <article class="portal-card guide-write-card">
+          <p class="eyebrow mini">Guide Board</p>
+          <h2>공략 게시판</h2>
+          <p class="muted">공략글을 작성하면 게시판 서버에 바로 저장되고, 접속한 모든 사용자가 같은 글을 볼 수 있습니다.</p>
+          <div class="board-status" id="board-status">게시판 상태 확인 중...</div>
+          <button class="primary-btn" id="open-post-editor" type="button">공략 작성하기</button>
+        </article>
+        <article class="portal-card soft-card" id="firebase-setup-notice">
+          <p class="eyebrow mini">Firebase Setup</p>
+          <h3>게시판 서버 설정 필요</h3>
+          <p class="muted"><code>src/firebase-config.js</code>에 Firebase Web App 설정값을 넣으면 실시간 게시판이 활성화됩니다. 설정 전에는 기존처럼 현재 브라우저에만 임시 저장됩니다.</p>
+        </article>
+      </section>
+
+      <section class="panel board-panel">
+        <div class="panel-header">
+          <h2>공략 목록</h2>
+          <div class="board-actions">
+            <label class="secondary-btn file-label">
+              JSON 백업 불러오기
+              <input id="import-posts" type="file" accept="application/json" hidden />
+            </label>
+            <button class="secondary-btn" id="download-posts" type="button">공략 백업 다운로드</button>
+            <button class="danger-btn" id="clear-local-posts" type="button">내 임시글 초기화</button>
+          </div>
+        </div>
+        <div class="post-list" id="post-list"></div>
+      </section>
+    </section>
+
+    <section class="content-page" id="page-links">
+      <section class="portal-grid">
+        <a class="link-card discord" href="https://discord.gg/" target="_blank" rel="noopener noreferrer">
+          <span class="link-icon">💬</span>
+          <strong>디스코드</strong>
+          <p>길드 디스코드 바로가기</p>
+        </a>
+        <a class="link-card kakao" href="https://open.kakao.com/o/gBuVvP3h" target="_blank" rel="noopener noreferrer">
+          <span class="link-icon">💛</span>
+          <strong>Lovely 단톡방</strong>
+          <p>카카오 오픈채팅 바로가기</p>
+        </a>
+      </section>
+    </section>
+
+    <footer>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.16.0</span>
+    </footer>
+  </main>
+
+  <dialog class="edit-dialog" id="edit-dialog">
+    <form class="edit-card" method="dialog">
+      <div class="edit-header">
+        <div>
+          <p class="eyebrow mini">Manual Edit</p>
+          <h2>점수 수정</h2>
+          <p id="edit-desc">비밀번호 없이 바로 수정할 수 있습니다. 현재 값과 7일 전 기준값을 저장하면 전체 사용자에게 바로 반영됩니다.</p>
+        </div>
+        <button class="icon-btn" id="close-editor" type="button" aria-label="닫기">×</button>
+      </div>
+
+      <div class="editor-view" id="editor-view">
+        <div class="editor-actions">
+          <button class="primary-btn" id="apply-manual" type="button">저장하기</button>
+          <button class="danger-btn" id="clear-manual" type="button">입력값 초기화</button>
+        </div>
+        <p class="edit-message" id="editor-message"></p>
+        <div class="editor-table-wrap">
+          <table class="editor-table">
+            <thead>
+              <tr>
+                <th>길드</th>
+                <th>닉네임</th>
+                <th>현재 전투력</th>
+                <th>7일 전 전투력</th>
+                <th>현재 토벌전</th>
+                <th>7일 전 토벌전</th>
+                <th>메모</th>
+              </tr>
+            </thead>
+            <tbody id="editor-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="edit-dialog post-dialog" id="post-dialog">
+    <form class="edit-card" method="dialog">
+      <div class="edit-header">
+        <div>
+          <p class="eyebrow mini">Write Guide</p>
+          <h2>공략 작성</h2>
+          <p>비밀번호를 입력하고 공략을 작성할 수 있습니다.</p>
+        </div>
+        <button class="icon-btn" id="close-post-editor" type="button" aria-label="닫기">×</button>
+      </div>
+
+      <div class="post-form-grid">
+        <label>
+          비밀번호
+          <input id="post-password" type="password" inputmode="numeric" autocomplete="off" placeholder="5645" />
+        </label>
+        <label>
+          작성자
+          <input id="post-author" type="text" placeholder="닉네임" />
+        </label>
+        <label>
+          분류
+          <select id="post-category">
+            <option value="토벌전">토벌전</option>
+            <option value="보스">보스</option>
+            <option value="육성">육성</option>
+            <option value="장비">장비</option>
+            <option value="기타">기타</option>
+          </select>
+        </label>
+        <label class="wide">
+          제목
+          <input id="post-title" type="text" placeholder="공략 제목" />
+        </label>
+        <label class="wide">
+          내용
+          <textarea id="post-content" rows="9" placeholder="공략 내용을 입력하세요. 줄바꿈은 그대로 표시됩니다."></textarea>
+        </label>
+      </div>
+
+      <div class="editor-actions">
+        <button class="primary-btn" id="save-post" type="button">작성 완료</button>
+        <button class="secondary-btn" id="reset-post-form" type="button">입력 초기화</button>
+      </div>
+      <p class="edit-message" id="post-message"></p>
+    </form>
+  </dialog>
+
+  <script type="module" src="src/main.js?v=1.16.0"></script>
+</body>
+</html>

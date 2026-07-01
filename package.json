@@ -1,0 +1,18 @@
+{
+  "name": "lovely-guild-dashboard",
+  "version": "1.16.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "collect": "node scripts/collect-data.js",
+    "collect:all": "GUILD_NAMES=LOVELY SERVER_ID=4 TOBEOL_MAX_PAGE=20 MEMBER_LIMIT=120 node scripts/collect-data.js",
+    "collect:lovely": "GUILD_NAMES=LOVELY SERVER_ID=4 TOBEOL_MAX_PAGE=20 MEMBER_LIMIT=120 node scripts/collect-data.js",
+    "serve": "node scripts/serve.js",
+    "collect:contents": "GUILD_CONTENT_NAMES=LOVELY node scripts/collect-guild-contents.js",
+    "collect:hotdeals": "node scripts/collect-hotdeals.js",
+    "collect:all-data": "npm run collect:all && npm run collect:contents && npm run collect:hotdeals",
+    "collect:mgf": "npm run collect:lovely",
+    "collect:dashboard": "npm run collect:all-data"
+  },
+  "devDependencies": {}
+}
