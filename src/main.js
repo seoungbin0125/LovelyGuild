@@ -3578,37 +3578,79 @@ function renderFeaturedMembers() {
 
 function renderFeaturedMemberItem(member, absoluteIndex) {
   const imageUrl = getCharacterImageUrl(member.nickname);
-  const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
-  const tobeolValue = Number(member.tobeolValue || 0);
-  const hasTobeol = tobeolValue > 0;
-  const participationClass = hasTobeol ? "is-hit" : "is-missed";
-  const participationText = hasTobeol ? "참여" : "미참여";
-  const jobText = escapeHtml(member.job || "-");
-  const levelText = `Lv.${escapeHtml(member.level || "-")}`;
-  const scoreText = hasTobeol ? escapeHtml(member.tobeolText || shortNumberKorean(tobeolValue)) : "—";
-  const gradeText = !hasTobeol ? "기록 없음" : (tobeolValue >= 100000 ? "높음" : "보통");
-  const gradeClass = !hasTobeol ? "empty" : (tobeolValue >= 100000 ? "high" : "normal");
+  const displayRank = absoluteIndex + 1;
+  const scoreValue = Number(member.tobeolValue || 0);
+  const participationClass = scoreValue > 0 ? "is-hit" : "is-missed";
+  const participationText = scoreValue > 0 ? "참여" : "미참여";
+  const scoreText = scoreValue > 0 ? numberFormat(scoreValue) : "—";
+  const grade = getFeaturedScoreGrade(scoreValue);
+  const medal = getFeaturedRankDisplay(displayRank);
 
   return `
-    <article class="featured-member-item ${hasTobeol ? "has-score" : "no-score"}">
-      <div class="featured-rank ${Number(rank) <= 3 ? `top-${escapeAttr(String(rank))}` : ""}">${escapeHtml(rank)}</div>
+    <article class="featured-member-item featured-rank-row ${member.isManual ? "manual-card" : ""}">
+      <div class="featured-rank ${displayRank <= 3 ? `top-${escapeAttr(String(displayRank))}` : ""}">
+        ${medal}
+      </div>
+
       <div class="featured-avatar-wrap">
-        <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
+        <img
+          class="featured-avatar"
+          src="${escapeAttr(imageUrl)}"
+          alt="${escapeAttr(member.nickname || "캐릭터")}"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');"
+        />
         <span class="featured-avatar-fallback">🌸</span>
       </div>
+
       <div class="featured-info">
         <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
-        <small class="featured-meta">${jobText} | ${levelText}</small>
+        <small class="featured-level">
+          ${escapeHtml(member.job || "-")} <span>|</span> Lv. ${escapeHtml(member.level || "-")}
+        </small>
       </div>
+
       <span class="featured-pill ${participationClass}">${participationText}</span>
-      <div class="featured-score-box">
+
+      <div class="featured-tobeol-box">
         <span>토벌전 점수</span>
-        <strong>${scoreText}</strong>
+        <strong class="${scoreValue > 0 ? "" : "is-empty"}">${escapeHtml(scoreText)}</strong>
       </div>
-      <span class="featured-grade ${gradeClass}">${gradeText}</span>
+
+      <span class="featured-score-grade ${grade.className}">${grade.label}</span>
     </article>
   `;
 }
+
+function getFeaturedRankDisplay(rank) {
+  if (rank === 1) return "🏆";
+  if (rank === 2) return "🥈";
+  if (rank === 3) return "🥉";
+  return String(rank);
+}
+
+function getFeaturedScoreGrade(score) {
+  if (score <= 0) {
+    return {
+      label: "기록 없음",
+      className: "none"
+    };
+  }
+
+  if (score >= 100000) {
+    return {
+      label: "높음",
+      className: "high"
+    };
+  }
+
+  return {
+    label: "보통",
+    className: "normal"
+  };
+}
+
 
 function shortNumberKorean(value, fallbackText = "-") {
   if (!Number.isFinite(Number(value)) || Number(value) <= 0) return fallbackText || "0";

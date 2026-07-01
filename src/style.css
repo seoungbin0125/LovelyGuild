@@ -7898,3 +7898,271 @@ footer.hidden-footer {
     font-size: 0.9rem;
   }
 }
+
+
+/* =========================================================
+   v1.27.x 길드원 현황: 1열 5명 랭킹 리스트형
+   - 기존 2x3 카드형 featured 스타일 덮어쓰기
+========================================================= */
+
+.featured-panel {
+  padding: 12px;
+  border: 1px solid rgba(242, 223, 214, 0.95);
+  border-radius: 22px;
+  background: rgba(255, 252, 248, 0.92);
+  box-shadow: 0 8px 24px rgba(100, 73, 62, 0.07);
+}
+
+.featured-header {
+  margin-bottom: 10px;
+}
+
+.featured-member-list {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 7px !important;
+}
+
+.featured-member-item.featured-rank-row {
+  display: grid !important;
+  grid-template-columns: 42px 46px minmax(0, 1fr) 58px minmax(94px, 0.62fr) 56px;
+  align-items: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 6px 10px;
+  border: 1px solid rgba(241, 225, 216, 0.96);
+  border-radius: 14px;
+  background: #fffefe;
+  box-shadow: 0 2px 8px rgba(100, 73, 62, 0.045);
+  text-align: left;
+}
+
+.featured-member-item.featured-rank-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(100, 73, 62, 0.08);
+}
+
+.featured-rank-row .featured-rank {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #6f554b;
+  font-size: 1rem;
+  font-weight: 1000;
+}
+
+.featured-rank-row .featured-rank.top-1,
+.featured-rank-row .featured-rank.top-2,
+.featured-rank-row .featured-rank.top-3 {
+  font-size: 1.45rem;
+}
+
+.featured-rank-row .featured-avatar-wrap {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  overflow: visible;
+  border-radius: 999px;
+  border: 1px solid rgba(235, 214, 204, 0.95);
+  background: linear-gradient(180deg, #fff8f2, #ffffff);
+}
+
+.featured-rank-row .featured-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.34);
+  transform-origin: center bottom;
+  filter: drop-shadow(0 4px 5px rgba(100, 73, 62, 0.15));
+}
+
+.featured-rank-row .featured-avatar-fallback {
+  display: none;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.1rem;
+}
+
+.featured-rank-row .featured-avatar-wrap.is-missing .featured-avatar-fallback {
+  display: grid;
+}
+
+.featured-rank-row .featured-info {
+  min-width: 0;
+  display: block;
+}
+
+.featured-rank-row .featured-name {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  color: #3b2a24;
+  font-size: 0.9rem;
+  font-weight: 1000;
+  line-height: 1.18;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.featured-rank-row .featured-level {
+  display: block;
+  width: 100%;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #9a8a82;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.18;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.featured-rank-row .featured-level span {
+  color: #dbcac0;
+}
+
+.featured-rank-row .featured-pill {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.featured-rank-row .featured-pill.is-hit {
+  color: #4f9f32;
+  background: #e7f7da;
+}
+
+.featured-rank-row .featured-pill.is-missed {
+  color: #6684c7;
+  background: #eef4ff;
+}
+
+.featured-rank-row .featured-tobeol-box {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  padding-left: 12px;
+  border-left: 1px solid #f3ebe6;
+}
+
+.featured-rank-row .featured-tobeol-box span {
+  color: #a89a92;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.featured-rank-row .featured-tobeol-box strong {
+  color: #f0446f;
+  font-size: 1.08rem;
+  font-weight: 1000;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.featured-rank-row .featured-tobeol-box strong.is-empty {
+  color: #9aa1ad;
+  font-size: 0.9rem;
+}
+
+.featured-rank-row .featured-score-grade {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 25px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.featured-rank-row .featured-score-grade.high {
+  color: #e11d48;
+  background: #ffe4ec;
+}
+
+.featured-rank-row .featured-score-grade.normal {
+  color: #c8791a;
+  background: #fff4dc;
+}
+
+.featured-rank-row .featured-score-grade.none {
+  color: #7b8794;
+  background: #f1f5f9;
+}
+
+/* 기존 카드형에서 쓰던 전투력 박스는 랭킹 리스트에서 숨김 */
+.featured-rank-row .featured-power-box {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .featured-member-item.featured-rank-row {
+    grid-template-columns: 34px 42px minmax(0, 1fr) 52px;
+    gap: 7px;
+    min-height: 64px;
+    padding: 7px 9px;
+  }
+
+  .featured-rank-row .featured-tobeol-box {
+    grid-column: 3 / 5;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .featured-rank-row .featured-score-grade {
+    display: none;
+  }
+
+  .featured-rank-row .featured-tobeol-box strong {
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .featured-panel {
+    padding: 10px;
+  }
+
+  .featured-member-item.featured-rank-row {
+    grid-template-columns: 30px 38px minmax(0, 1fr) 48px;
+    border-radius: 13px;
+  }
+
+  .featured-rank-row .featured-avatar-wrap {
+    width: 38px;
+    height: 38px;
+  }
+
+  .featured-rank-row .featured-name {
+    font-size: 0.84rem;
+  }
+
+  .featured-rank-row .featured-level {
+    font-size: 0.68rem;
+  }
+
+  .featured-rank-row .featured-pill {
+    min-width: 44px;
+    height: 24px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+  }
+}
+
