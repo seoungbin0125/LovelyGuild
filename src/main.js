@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.31.0";
+const APP_VERSION = "v1.32.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
