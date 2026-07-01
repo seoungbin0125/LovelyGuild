@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.21.0";
+const APP_VERSION = "v1.22.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -41,10 +41,10 @@ const state = {
   boardMode: isFirebaseConfigured(FIREBASE_CONFIG) ? "firebase" : "local",
   boardLoaded: false,
   page: "dashboard",
-  tab: "tobeol",
+  tab: "power",
   guildFilter: "all",
   keyword: "",
-  sort: "tobeol",
+  sort: "powerGrowth",
   visualGuildFilter: "all",
   visualKeyword: "",
   visualSort: "powerGrowth",
@@ -251,11 +251,6 @@ function bindEvents() {
   refs.mainTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       state.page = tab.dataset.page;
-      if (tab.dataset.metricTab) {
-        state.tab = tab.dataset.metricTab;
-        refs.tabs.forEach((item) => item.classList.toggle("active", item.dataset.tab === state.tab));
-        syncSortByTab();
-      }
       refs.mainTabs.forEach((item) => item.classList.toggle("active", item === tab));
       renderPage();
     });
@@ -1002,8 +997,8 @@ function render() {
   const guilds = getGuilds();
   const selectedGuildText = state.guildFilter === "all" ? guilds.join(" · ") : state.guildFilter;
 
-  refs.title.textContent = `${selectedGuildText || "길드"} 성장률 대시보드`;
-  refs.subtitle.textContent = `전투력 · 토벌전 현황 · ${data.capturedDate || "-"} 수집 / 7일 전 비교`;
+  refs.title.textContent = "Lovely 길드 포털";
+  refs.subtitle.textContent = `${selectedGuildText || "LOVELY"} 현황 · 전투력과 토벌전을 한 화면에서 보기`;
 
   renderSummary();
   renderTable();
@@ -1012,8 +1007,7 @@ function render() {
 
   const editText = data.manualAppliedCount > 0 ? ` · 수정 ${data.manualAppliedCount}건 반영` : "";
   const sourceText = data.dataSource === "MGF guild_info" ? " · 기준: MGF 길드 상세" : "";
-  const comparisonText = getComparisonDateText(data, state.guildFilter);
-  refs.footerText.textContent = `${APP_VERSION} · ${selectedGuildText || "-"} · 현재 ${data.capturedDate || "-"} 수집${sourceText} · 7일 전 비교 ${comparisonText}${editText}`;
+  refs.footerText.textContent = `${APP_VERSION} · ${selectedGuildText || "LOVELY"} · ${data.capturedDate || "-"} 수집${sourceText}${editText}`;
 }
 
 function getComparisonDateText(data, guildFilter) {
@@ -1052,25 +1046,14 @@ function getActionsWorkflowUrl() {
 function renderSummary() {
   const members = getGuildFilteredMembers();
   const summary = buildSummary(members);
-  const isTobeol = state.tab === "tobeol";
-  const hitMembers = members.filter((member) => Number(member.tobeolValue || 0) > 0);
-  const missedCount = Math.max(0, members.length - hitMembers.length);
-  const avgTobeol = hitMembers.length
-    ? Math.round(hitMembers.reduce((sum, member) => sum + Number(member.tobeolValue || 0), 0) / hitMembers.length)
-    : 0;
-  const avgPower = members.length
-    ? Math.round(members.reduce((sum, member) => sum + Number(member.powerValue || 0), 0) / members.length)
-    : 0;
-  const cards = isTobeol ? [
-    { label: "참여 인원", value: `${hitMembers.length}명`, sub: `전체 ${members.length}명 중`, icon: "👥", tone: "green" },
-    { label: "미참여", value: `${missedCount}명`, sub: missedCount ? "아직 참여하지 않았어요" : "전원 참여 확인", icon: "🧡", tone: "orange" },
-    { label: "총 토벌 점수", value: formatKoreanPower(summary.totalTobeolValue || 0), sub: "이번 주 누적 점수", icon: "🏆", tone: "purple" },
-    { label: "평균 점수", value: formatKoreanPower(avgTobeol), sub: "참여자 기준 평균", icon: "⭐", tone: "blue" }
-  ] : [
-    { label: "길드원", value: `${summary.memberCount || 0}명`, sub: "현재 수집 인원", icon: "👥", tone: "green" },
-    { label: "수집 기준", value: state.data?.capturedDate || "-", sub: "MGF 최신 데이터", icon: "🗓️", tone: "orange" },
-    { label: "총 전투력", value: formatKoreanPower(summary.totalPowerValue || 0), sub: "길드 합산 전투력", icon: "⚡", tone: "purple" },
-    { label: "평균 전투력", value: formatKoreanPower(avgPower), sub: "길드원 평균", icon: "⭐", tone: "blue" }
+  const avgPower = summary.memberCount ? Math.floor(summary.totalPowerValue / summary.memberCount) : 0;
+  const avgTobeol = summary.memberCount ? Math.floor(summary.totalTobeolValue / summary.memberCount) : 0;
+  const cards = [
+    { label: "길드원", value: `${summary.memberCount || 0}명`, icon: "👥", tone: "primary" },
+    { label: "총 전투력", value: formatKoreanPower(summary.totalPowerValue || 0), icon: "⚡", tone: "featured" },
+    { label: "총 토벌전", value: formatKoreanPower(summary.totalTobeolValue || 0), icon: "🏹", tone: "accent" },
+    { label: "평균 전투력", value: formatKoreanPower(avgPower || 0), icon: "✨", tone: "soft" },
+    { label: "평균 토벌전", value: formatKoreanPower(avgTobeol || 0), icon: "🎯", tone: "soft" }
   ];
 
   refs.summaryGrid.innerHTML = cards.map((card) => `
@@ -1080,7 +1063,6 @@ function renderSummary() {
         <div class="label">${escapeHtml(card.label)}</div>
       </div>
       <div class="value">${escapeHtml(card.value)}</div>
-      <div class="summary-sub">${escapeHtml(card.sub || "")}</div>
     </article>
   `).join("");
 }
@@ -3540,10 +3522,10 @@ function escapeAttr(value) {
 // src/main.js 의 renderTable 함수를 이렇게 수정해보세요
 function renderTable() {
   const members = getFilteredMembers();
-  const table = getTableSpec(state.tab);
+  const table = getTableSpec("power");
 
-  refs.panelTitle.textContent = table.title;
-  refs.panelDesc.textContent = table.desc;
+  refs.panelTitle.textContent = "길드원 현황";
+  refs.panelDesc.textContent = "캐릭터 이미지 · 전투력 · 토벌전 점수 · 변화량";
   refs.tableHead.innerHTML = `<tr>${table.columns.map((column) => `<th>${column.label}</th>`).join("")}</tr>`;
 
   if (members.length === 0) {
@@ -3566,23 +3548,13 @@ function renderTable() {
 }
 
 function renderMemberCard(member, index) {
-  const isTobeol = state.tab === "tobeol";
-  const currentLabel = isTobeol ? "현재 점수" : "현재 전투력";
-  const previousLabel = isTobeol ? "7일 전 점수" : "7일 전 전투력";
-  const currentValue = isTobeol ? (member.tobeolText || formatKoreanPower(member.tobeolValue)) : (member.powerText || formatKoreanPower(member.powerValue));
-  const previousValue = isTobeol ? (member.previousTobeolText || "-") : (member.previousPowerText || "-");
-  const growthValue = isTobeol
-    ? renderGrowth(member.tobeolGrowthValue, member.tobeolGrowthText)
-    : renderGrowth(member.powerGrowthValue, member.powerGrowthText);
-  const rateValue = isTobeol ? renderRate(member.tobeolGrowthRate) : renderRate(member.powerGrowthRate);
   const rank = member.rank ? `#${escapeHtml(member.rank)}` : `#${index + 1}`;
   const manualBadge = member.isManual ? `<span class="manual-badge">수정</span>` : "";
   const statusBadge = renderMemberStatusBadge(member);
   const imageUrl = getCharacterImageUrl(member.nickname);
-  const scoreClass = isTobeol ? "score-pink" : "score-indigo";
 
   return `
-    <article class="member-card ${member.isManual ? "manual-card" : ""} ${isTobeol ? "member-card-tobeol" : "member-card-power"}">
+    <article class="member-card ${member.isManual ? "manual-card" : ""}">
       <div class="member-card-head">
         <div class="member-badges">
           <span class="member-rank-chip">${rank}</span>
@@ -3598,15 +3570,24 @@ function renderMemberCard(member, index) {
             <div class="member-sub">${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</div>
           </div>
         </div>
-        <div class="member-highlight ${scoreClass}">
-          <span>${escapeHtml(currentLabel)}</span>
-          <strong>${escapeHtml(currentValue)}</strong>
+      </div>
+
+      <div class="member-score-row">
+        <div class="member-highlight score-indigo">
+          <span>전투력</span>
+          <strong>${escapeHtml(member.powerText || formatKoreanPower(member.powerValue))}</strong>
+        </div>
+        <div class="member-highlight score-pink">
+          <span>토벌전</span>
+          <strong>${escapeHtml(member.tobeolText || formatKoreanPower(member.tobeolValue))}</strong>
         </div>
       </div>
-      <div class="member-metrics compact">
-        ${renderMetric(previousLabel, escapeHtml(previousValue))}
-        ${renderMetric("성장", growthValue)}
-        ${renderMetric("성장률", rateValue)}
+
+      <div class="member-metrics compact dual-metrics">
+        ${renderMetric("전투력 변화", renderGrowth(member.powerGrowthValue, member.powerGrowthText))}
+        ${renderMetric("토벌전 변화", renderGrowth(member.tobeolGrowthValue, member.tobeolGrowthText))}
+        ${renderMetric("전투력 성장률", renderRate(member.powerGrowthRate))}
+        ${renderMetric("토벌전 성장률", renderRate(member.tobeolGrowthRate))}
       </div>
     </article>
   `;

@@ -3,51 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.21.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.21.0" />
+  <title>Lovely 길드 포털 v1.22.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.22.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
-      <div class="app-title-row">
-        <div>
-          <p class="eyebrow">Lovely Guild Portal</p>
-          <h1 id="title">Lovely 길드 포털</h1>
-        </div>
-        <span class="version-pill">v1.21.0</span>
+      <div>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.22.0</span></p>
+        <h1 id="title">Lovely 길드 포털</h1>
+        <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 캐릭터 · 길드 컨텐츠</p>
       </div>
-      <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 캐릭터 · 길드 컨텐츠</p>
-    </section>
-
-    <section class="lovely-cover">
-      <div class="lovely-cover-card">
-        <div class="lovely-cover-copy">
-          <span class="cover-chip">Scania 4</span>
-          <h2>LOVELY 길드</h2>
-          <p>따뜻한 인연, 함께 만드는 이야기 ♥</p>
-        </div>
+      <div class="hero-actions main-nav" aria-label="메인 메뉴">
+        <button class="main-tab active" data-page="dashboard" type="button">현황</button>
+                <button class="main-tab" data-page="live-tobeol" type="button">실시간 토벌</button>
+        <button class="main-tab" data-page="contents" type="button">길드 컨텐츠</button>
+        <button class="main-tab" data-page="hotdeals" type="button">핫딜</button>
+        <button class="main-tab" data-page="guide" type="button">공략</button>
+        <button class="main-tab" data-page="links" type="button">링크</button>
       </div>
     </section>
-
-    <section class="top-nav-shell" aria-label="메인 메뉴">
-      <div class="hero-actions main-nav">
-        <button class="main-tab" data-page="dashboard" data-metric-tab="power" type="button">📊 현황</button>
-        <button class="main-tab" data-page="characters" type="button">👤 캐릭터</button>
-        <button class="main-tab active" data-page="dashboard" data-metric-tab="tobeol" type="button">⚔️ 토벌전</button>
-        <button class="main-tab" data-page="contents" type="button">⭐ 길드 컨텐츠</button>
-        <button class="main-tab" data-page="live-tobeol" type="button">⚡ 실시간 토벌</button>
-      </div>
-    </section>
-
     <section class="content-page active" id="page-dashboard">
-      <section class="dashboard-tabs">
-        <div class="hero-actions">
-          <button class="tab" data-tab="power" type="button">전투력</button>
-          <button class="tab active" data-tab="tobeol" type="button">토벌전</button>
-          <button class="edit-open-btn" id="open-editor" type="button">점수 수정</button>
-        </div>
-      </section>
-
       <section class="summary-grid" id="summary-grid"></section>
 
 
@@ -77,8 +53,11 @@
 
       <section class="panel">
         <div class="panel-header">
-          <h2 id="panel-title">전투력 성장</h2>
-          <p id="panel-desc">최신 수집 데이터 기준입니다.</p>
+          <div>
+            <h2 id="panel-title">길드원 현황</h2>
+            <p id="panel-desc">전투력과 토벌전 점수를 한눈에 볼 수 있습니다.</p>
+          </div>
+          <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
         </div>
         <div class="table-wrap" aria-label="길드원 데이터 표">
           <table>
@@ -359,7 +338,7 @@
     </section>
 
     <footer>
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.21.0</span>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.22.0</span>
     </footer>
   </main>
 
@@ -448,6 +427,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.21.0"></script>
+  <script type="module" src="src/main.js?v=1.22.0"></script>
 </body>
 </html>
