@@ -7899,270 +7899,237 @@ footer.hidden-footer {
   }
 }
 
-
-/* =========================================================
-   v1.27.x 길드원 현황: 1열 5명 랭킹 리스트형
-   - 기존 2x3 카드형 featured 스타일 덮어쓰기
-========================================================= */
-
+/* v1.29.0: reference-style single-column 5-row member list */
 .featured-panel {
-  padding: 12px;
-  border: 1px solid rgba(242, 223, 214, 0.95);
+  padding: 10px;
   border-radius: 22px;
-  background: rgba(255, 252, 248, 0.92);
-  box-shadow: 0 8px 24px rgba(100, 73, 62, 0.07);
 }
 
 .featured-header {
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.featured-header h2 {
+  margin: 0;
+  font-size: 1.16rem;
+  letter-spacing: -0.04em;
+}
+
+.featured-header p {
+  display: none !important;
+}
+
+.featured-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.subtle-filter-btn,
+.subtle-edit-btn {
+  min-width: auto;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+#featured-prev,
+#featured-next {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
 }
 
 .featured-member-list {
   display: grid !important;
   grid-template-columns: 1fr !important;
-  gap: 7px !important;
+  gap: 6px !important;
 }
 
-.featured-member-item.featured-rank-row {
+.featured-member-item {
   display: grid !important;
-  grid-template-columns: 42px 46px minmax(0, 1fr) 58px minmax(94px, 0.62fr) 56px;
-  align-items: center;
-  gap: 8px;
-  min-height: 58px;
-  padding: 6px 10px;
-  border: 1px solid rgba(241, 225, 216, 0.96);
-  border-radius: 14px;
-  background: #fffefe;
-  box-shadow: 0 2px 8px rgba(100, 73, 62, 0.045);
-  text-align: left;
+  grid-template-columns: 28px 52px minmax(0, 1fr) 44px 86px 44px !important;
+  grid-template-areas: "rank avatar info pill score grade" !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-height: 66px;
+  padding: 7px 8px !important;
+  border: 1px solid rgba(231, 220, 211, 0.96) !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 2px 8px rgba(140, 107, 92, 0.05) !important;
+  text-align: left !important;
 }
 
-.featured-member-item.featured-rank-row:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(100, 73, 62, 0.08);
-}
-
-.featured-rank-row .featured-rank {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  color: #6f554b;
-  font-size: 1rem;
+.featured-rank {
+  grid-area: rank !important;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 0.76rem !important;
   font-weight: 1000;
 }
 
-.featured-rank-row .featured-rank.top-1,
-.featured-rank-row .featured-rank.top-2,
-.featured-rank-row .featured-rank.top-3 {
-  font-size: 1.45rem;
+.featured-avatar-wrap {
+  grid-area: avatar !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  border: 2px solid #fff !important;
+  background: linear-gradient(180deg, #fff8f1, #ffece4) !important;
+  box-shadow: 0 5px 12px rgba(170, 130, 115, 0.12) !important;
 }
 
-.featured-rank-row .featured-avatar-wrap {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  overflow: visible;
-  border-radius: 999px;
-  border: 1px solid rgba(235, 214, 204, 0.95);
-  background: linear-gradient(180deg, #fff8f2, #ffffff);
+.featured-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: scale(1.24) !important;
 }
 
-.featured-rank-row .featured-avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: scale(1.34);
-  transform-origin: center bottom;
-  filter: drop-shadow(0 4px 5px rgba(100, 73, 62, 0.15));
+.featured-info {
+  grid-area: info !important;
+  min-width: 0 !important;
+  display: grid !important;
+  gap: 3px !important;
+  align-self: center !important;
 }
 
-.featured-rank-row .featured-avatar-fallback {
-  display: none;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: 1.1rem;
+.featured-name {
+  display: block !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  color: #322823 !important;
+  font-size: 0.9rem !important;
+  font-weight: 1000 !important;
+  line-height: 1.18 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  word-break: keep-all !important;
 }
 
-.featured-rank-row .featured-avatar-wrap.is-missing .featured-avatar-fallback {
-  display: grid;
+.featured-meta {
+  display: block !important;
+  width: 100% !important;
+  color: #8d7b71 !important;
+  font-size: 0.61rem !important;
+  line-height: 1.12 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-.featured-rank-row .featured-info {
-  min-width: 0;
-  display: block;
+.featured-pill {
+  grid-area: pill !important;
+  justify-self: center !important;
+  min-height: 24px !important;
+  padding: 0 8px !important;
+  border-radius: 999px !important;
+  font-size: 0.62rem !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
 }
 
-.featured-rank-row .featured-name {
-  display: block;
-  width: 100%;
-  min-height: 0;
-  overflow: hidden;
-  color: #3b2a24;
-  font-size: 0.9rem;
-  font-weight: 1000;
-  line-height: 1.18;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.featured-score-box {
+  grid-area: score !important;
+  display: grid !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  text-align: left !important;
 }
 
-.featured-rank-row .featured-level {
-  display: block;
-  width: 100%;
-  margin-top: 3px;
-  overflow: hidden;
-  color: #9a8a82;
-  font-size: 0.72rem;
-  font-weight: 800;
-  line-height: 1.18;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.featured-score-box span {
+  color: #9b8a80 !important;
+  font-size: 0.57rem !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
 }
 
-.featured-rank-row .featured-level span {
-  color: #dbcac0;
+.featured-score-box strong {
+  color: #e15474 !important;
+  font-size: 0.96rem !important;
+  font-weight: 1000 !important;
+  line-height: 1.08 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-.featured-rank-row .featured-pill {
-  justify-self: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 48px;
-  height: 26px;
-  padding: 0 10px;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 1000;
-  white-space: nowrap;
+.featured-member-item.no-score .featured-score-box strong {
+  color: #4d423d !important;
 }
 
-.featured-rank-row .featured-pill.is-hit {
-  color: #4f9f32;
-  background: #e7f7da;
+.featured-grade {
+  grid-area: grade !important;
+  justify-self: end !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 24px !important;
+  padding: 0 8px !important;
+  border-radius: 999px !important;
+  font-size: 0.6rem !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
 }
 
-.featured-rank-row .featured-pill.is-missed {
-  color: #6684c7;
-  background: #eef4ff;
+.featured-grade.high {
+  color: #e05f79 !important;
+  background: #fff0f4 !important;
 }
 
-.featured-rank-row .featured-tobeol-box {
-  min-width: 0;
-  display: grid;
-  align-content: center;
-  gap: 1px;
-  padding-left: 12px;
-  border-left: 1px solid #f3ebe6;
+.featured-grade.normal {
+  color: #c78320 !important;
+  background: #fff5e7 !important;
 }
 
-.featured-rank-row .featured-tobeol-box span {
-  color: #a89a92;
-  font-size: 0.66rem;
-  font-weight: 900;
-  line-height: 1.1;
+.featured-grade.empty {
+  color: #7f716b !important;
+  background: #f4f0ec !important;
 }
 
-.featured-rank-row .featured-tobeol-box strong {
-  color: #f0446f;
-  font-size: 1.08rem;
-  font-weight: 1000;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-}
-
-.featured-rank-row .featured-tobeol-box strong.is-empty {
-  color: #9aa1ad;
-  font-size: 0.9rem;
-}
-
-.featured-rank-row .featured-score-grade {
-  justify-self: end;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 48px;
-  height: 25px;
-  padding: 0 9px;
-  border-radius: 999px;
-  font-size: 0.68rem;
-  font-weight: 1000;
-  white-space: nowrap;
-}
-
-.featured-rank-row .featured-score-grade.high {
-  color: #e11d48;
-  background: #ffe4ec;
-}
-
-.featured-rank-row .featured-score-grade.normal {
-  color: #c8791a;
-  background: #fff4dc;
-}
-
-.featured-rank-row .featured-score-grade.none {
-  color: #7b8794;
-  background: #f1f5f9;
-}
-
-/* 기존 카드형에서 쓰던 전투력 박스는 랭킹 리스트에서 숨김 */
-.featured-rank-row .featured-power-box {
+.featured-power-box,
+.featured-level {
   display: none !important;
 }
 
-@media (max-width: 720px) {
-  .featured-member-item.featured-rank-row {
-    grid-template-columns: 34px 42px minmax(0, 1fr) 52px;
-    gap: 7px;
-    min-height: 64px;
-    padding: 7px 9px;
+@media (max-width: 390px) {
+  .featured-member-item {
+    grid-template-columns: 26px 48px minmax(0, 1fr) 40px 76px 38px !important;
+    gap: 5px !important;
+    padding: 7px 7px !important;
   }
 
-  .featured-rank-row .featured-tobeol-box {
-    grid-column: 3 / 5;
-    padding-left: 0;
-    border-left: 0;
+  .featured-avatar-wrap {
+    width: 48px !important;
+    height: 48px !important;
   }
 
-  .featured-rank-row .featured-score-grade {
-    display: none;
+  .featured-name {
+    font-size: 0.84rem !important;
   }
 
-  .featured-rank-row .featured-tobeol-box strong {
-    font-size: 0.98rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .featured-panel {
-    padding: 10px;
+  .featured-meta {
+    font-size: 0.56rem !important;
   }
 
-  .featured-member-item.featured-rank-row {
-    grid-template-columns: 30px 38px minmax(0, 1fr) 48px;
-    border-radius: 13px;
+  .featured-score-box strong {
+    font-size: 0.86rem !important;
   }
 
-  .featured-rank-row .featured-avatar-wrap {
-    width: 38px;
-    height: 38px;
-  }
-
-  .featured-rank-row .featured-name {
-    font-size: 0.84rem;
-  }
-
-  .featured-rank-row .featured-level {
-    font-size: 0.68rem;
-  }
-
-  .featured-rank-row .featured-pill {
-    min-width: 44px;
-    height: 24px;
-    padding: 0 8px;
-    font-size: 0.68rem;
+  .featured-pill,
+  .featured-grade {
+    padding: 0 6px !important;
+    font-size: 0.56rem !important;
   }
 }
-
