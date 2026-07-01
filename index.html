@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.22.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.22.0" />
+  <title>Lovely 길드 포털 v1.23.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.23.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
       <div>
-        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.22.0</span></p>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.23.0</span></p>
         <h1 id="title">Lovely 길드 포털</h1>
         <p id="subtitle">전투력 · 토벌전 · 실시간 토벌 · 캐릭터 · 길드 컨텐츠</p>
       </div>
@@ -27,35 +27,52 @@
       <section class="summary-grid" id="summary-grid"></section>
 
 
-      <section class="toolbar">
-        <label>
-          길드
-          <select id="guild-filter">
-            <option value="all">전체</option>
-          </select>
-        </label>
-        <label>
-          검색
-          <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
-        </label>
-        <label>
-          정렬
-          <select id="sort">
-            <option value="powerGrowth">전투력 성장 높은순</option>
-            <option value="power">현재 전투력 높은순</option>
-            <option value="tobeolGrowth">토벌전 성장 높은순</option>
-            <option value="tobeol">토벌전 점수 높은순</option>
-            <option value="level">레벨 높은순</option>
-            <option value="rank">길드 순위순</option>
-          </select>
-        </label>
+      <section class="featured-panel">
+        <div class="featured-header">
+          <div>
+            <h2>길드원 현황</h2>
+            <p>한 화면에서 많이 보이도록 5명씩 표시합니다.</p>
+          </div>
+          <div class="featured-controls">
+            <button id="featured-prev" type="button" aria-label="이전 5명">◀</button>
+            <button id="featured-next" type="button" aria-label="다음 5명">▶</button>
+          </div>
+        </div>
+        <div class="featured-member-list" id="featured-member-list"></div>
       </section>
 
-      <section class="panel">
+      <details class="filter-drawer">
+        <summary>필터 / 검색 열기</summary>
+        <section class="toolbar">
+          <label>
+            길드
+            <select id="guild-filter">
+              <option value="all">전체</option>
+            </select>
+          </label>
+          <label>
+            검색
+            <input id="keyword" type="search" placeholder="길드 / 닉네임 / 직업" />
+          </label>
+          <label>
+            정렬
+            <select id="sort">
+              <option value="powerGrowth">전투력 성장 높은순</option>
+              <option value="power">현재 전투력 높은순</option>
+              <option value="tobeolGrowth">토벌전 성장 높은순</option>
+              <option value="tobeol">토벌전 점수 높은순</option>
+              <option value="level">레벨 높은순</option>
+              <option value="rank">길드 순위순</option>
+            </select>
+          </label>
+        </section>
+      </details>
+
+      <section class="panel mini-panel">
         <div class="panel-header">
           <div>
-            <h2 id="panel-title">길드원 현황</h2>
-            <p id="panel-desc">전투력과 토벌전 점수를 한눈에 볼 수 있습니다.</p>
+            <h2 id="panel-title">전체 카드 보기</h2>
+            <p id="panel-desc">아래 카드 영역은 좌우로 넘기며 더 볼 수 있습니다.</p>
           </div>
           <button class="edit-open-btn subtle-edit-btn" id="open-editor" type="button" aria-label="점수 수정">⚙ 수정</button>
         </div>
@@ -338,7 +355,7 @@
     </section>
 
     <footer>
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.22.0</span>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.23.0</span>
     </footer>
   </main>
 
@@ -427,6 +444,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.22.0"></script>
+  <script type="module" src="src/main.js?v=1.23.0"></script>
 </body>
 </html>

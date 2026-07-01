@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.22.0";
+const APP_VERSION = "v1.23.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -45,6 +45,7 @@ const state = {
   guildFilter: "all",
   keyword: "",
   sort: "powerGrowth",
+  featuredStartIndex: 0,
   visualGuildFilter: "all",
   visualKeyword: "",
   visualSort: "powerGrowth",
@@ -102,6 +103,9 @@ const refs = {
   guildFilter: document.getElementById("guild-filter"),
   keyword: document.getElementById("keyword"),
   sort: document.getElementById("sort"),
+  featuredMemberList: document.getElementById("featured-member-list"),
+  featuredPrev: document.getElementById("featured-prev"),
+  featuredNext: document.getElementById("featured-next"),
   panelTitle: document.getElementById("panel-title"),
   panelDesc: document.getElementById("panel-desc"),
   tableHead: document.getElementById("table-head"),
@@ -267,17 +271,28 @@ function bindEvents() {
 
   refs.guildFilter?.addEventListener("change", (event) => {
     state.guildFilter = event.target.value;
+    state.featuredStartIndex = 0;
     render();
   });
 
   refs.keyword?.addEventListener("input", (event) => {
     state.keyword = event.target.value.trim();
-    renderTable();
+    state.featuredStartIndex = 0;
+    render();
   });
 
   refs.sort?.addEventListener("change", (event) => {
     state.sort = event.target.value;
-    renderTable();
+    state.featuredStartIndex = 0;
+    render();
+  });
+
+  refs.featuredPrev?.addEventListener("click", () => {
+    moveFeaturedWindow(-5);
+  });
+
+  refs.featuredNext?.addEventListener("click", () => {
+    moveFeaturedWindow(5);
   });
 
   refs.visualGuildFilter?.addEventListener("change", (event) => {
@@ -1001,6 +1016,7 @@ function render() {
   refs.subtitle.textContent = `${selectedGuildText || "LOVELY"} 현황 · 전투력과 토벌전을 한 화면에서 보기`;
 
   renderSummary();
+  renderFeaturedMembers();
   renderTable();
 
   if (state.page !== "dashboard") return;
@@ -3518,6 +3534,66 @@ function escapeAttr(value) {
   return escapeHtml(value);
 }
 
+
+
+function moveFeaturedWindow(delta) {
+  const members = getFilteredMembers();
+  const size = 5;
+  if (!members.length) return;
+  const maxStart = Math.max(0, Math.floor((members.length - 1) / size) * size);
+  state.featuredStartIndex = Math.max(0, Math.min(maxStart, state.featuredStartIndex + delta));
+  renderFeaturedMembers();
+}
+
+function renderFeaturedMembers() {
+  if (!refs.featuredMemberList) return;
+  const members = getFilteredMembers();
+  if (!members.length) {
+    refs.featuredMemberList.innerHTML = `<div class="empty featured-empty">표시할 길드원이 없습니다.</div>`;
+    if (refs.featuredPrev) refs.featuredPrev.disabled = true;
+    if (refs.featuredNext) refs.featuredNext.disabled = true;
+    return;
+  }
+
+  const pageSize = 5;
+  const maxStart = Math.max(0, Math.floor((members.length - 1) / pageSize) * pageSize);
+  if (state.featuredStartIndex > maxStart) state.featuredStartIndex = maxStart;
+  const windowMembers = members.slice(state.featuredStartIndex, state.featuredStartIndex + pageSize);
+  refs.featuredMemberList.innerHTML = windowMembers.map((member, index) => renderFeaturedMemberItem(member, state.featuredStartIndex + index)).join("");
+
+  if (refs.featuredPrev) refs.featuredPrev.disabled = state.featuredStartIndex <= 0;
+  if (refs.featuredNext) refs.featuredNext.disabled = state.featuredStartIndex + pageSize >= members.length;
+}
+
+function renderFeaturedMemberItem(member, absoluteIndex) {
+  const imageUrl = getCharacterImageUrl(member.nickname);
+  const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
+  const participationClass = Number(member.tobeolValue || 0) > 0 ? "is-hit" : "is-missed";
+  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참여";
+
+  return `
+    <article class="featured-member-item">
+      <div class="featured-rank ${Number(rank) <= 3 ? `top-${escapeAttr(String(rank))}` : ""}">${escapeHtml(rank)}</div>
+      <div class="featured-avatar-wrap">
+        <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
+        <span class="featured-avatar-fallback">🌸</span>
+      </div>
+      <div class="featured-main">
+        <strong>${escapeHtml(member.nickname || "-")}</strong>
+        <small>${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</small>
+      </div>
+      <span class="featured-pill ${participationClass}">${participationText}</span>
+      <div class="featured-power-box">
+        <span>전투력</span>
+        <strong>${escapeHtml(member.powerText || formatKoreanPower(member.powerValue))}</strong>
+      </div>
+      <div class="featured-score-box">
+        <span>토벌전</span>
+        <strong>${escapeHtml(member.tobeolText || formatKoreanPower(member.tobeolValue))}</strong>
+      </div>
+    </article>
+  `;
+}
 
 // src/main.js 의 renderTable 함수를 이렇게 수정해보세요
 function renderTable() {
