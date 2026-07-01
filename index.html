@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lovely 길드 포털 v1.29.0</title>
-  <link rel="stylesheet" href="src/style.css?v=1.29.0" />
+  <title>Lovely 길드 포털 v1.30.0</title>
+  <link rel="stylesheet" href="src/style.css?v=1.30.0" />
 </head>
 <body>
   <main class="page">
     <section class="hero">
       <div>
-        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.29.0</span></p>
+        <p class="eyebrow">Lovely Guild Portal <span class="version-pill">v1.30.0</span></p>
         <h1 id="title">Lovely 길드 포털</h1>
         <p id="subtitle" class="hidden-subtitle"></p>
       </div>
@@ -34,7 +34,7 @@
         <div class="featured-header">
           <div>
             <h2>길드원 현황</h2>
-            <p>한 화면에서 보기 쉽게 정리했습니다.</p>
+            <p>전투력 기준으로 7일 전과 상승률을 함께 보여줍니다.</p>
           </div>
           <div class="featured-controls">
             <button class="secondary-btn subtle-filter-btn" id="open-filter" type="button">필터</button>
@@ -203,24 +203,16 @@
 
       <section class="live-tobeol-summary" id="live-tobeol-summary"></section>
 
-      <section class="live-tobeol-columns">
-        <article class="live-tobeol-panel missed">
+      <section class="live-tobeol-columns live-tobeol-single">
+        <article class="live-tobeol-panel unified">
           <div class="panel-header compact">
             <div>
-              <h2>아직 안 친 사람</h2>
-              <p>현재 토벌전 점수 0점 또는 랭킹 미매칭</p>
+              <h2>토벌전 현황</h2>
+              <p>길드원 전체를 한 리스트에서 참여/미참여로 표시합니다.</p>
             </div>
           </div>
-          <div class="live-tobeol-list" id="live-tobeol-miss-list"></div>
-        </article>
-        <article class="live-tobeol-panel hit">
-          <div class="panel-header compact">
-            <div>
-              <h2>친 사람</h2>
-              <p>토벌전 랭킹에서 점수가 확인된 길드원</p>
-            </div>
-          </div>
-          <div class="live-tobeol-list" id="live-tobeol-hit-list"></div>
+          <div class="live-tobeol-list unified-list" id="live-tobeol-miss-list"></div>
+          <div class="live-tobeol-list hidden-live-list" id="live-tobeol-hit-list" aria-hidden="true"></div>
         </article>
       </section>
     </section>
@@ -311,7 +303,7 @@
     </nav>
 
     <footer class="hidden-footer">
-      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.29.0</span>
+      <span id="footer-text">데이터 로딩 중...</span><span class="footer-version">v1.30.0</span>
     </footer>
   </main>
 
@@ -432,6 +424,6 @@
     </form>
   </dialog>
 
-  <script type="module" src="src/main.js?v=1.29.0"></script>
+  <script type="module" src="src/main.js?v=1.30.0"></script>
 </body>
 </html>

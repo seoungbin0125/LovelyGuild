@@ -8133,3 +8133,191 @@ footer.hidden-footer {
     font-size: 0.56rem !important;
   }
 }
+
+/* v1.30.0 power-focused rows and unified tobeol list */
+.featured-member-item.power-row {
+  grid-template-columns: 30px 54px minmax(0, 1fr) minmax(100px, 0.72fr) auto !important;
+  grid-template-areas:
+    "rank avatar info score grade"
+    "rank avatar info score growth" !important;
+  min-height: 72px !important;
+}
+
+.power-row .featured-avatar-wrap {
+  width: 54px !important;
+  height: 54px !important;
+}
+
+.power-row .featured-name {
+  font-size: 0.95rem !important;
+}
+
+.power-row .featured-meta {
+  font-size: 0.62rem !important;
+}
+
+.power-row .featured-score-box {
+  grid-area: score !important;
+}
+
+.featured-score-box small {
+  display: block;
+  min-width: 0;
+  color: #9b8a80;
+  font-size: 0.56rem;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.power-score strong {
+  color: #5662c9 !important;
+  font-size: 0.86rem !important;
+}
+
+.featured-growth-value {
+  grid-area: growth;
+  justify-self: end;
+  align-self: start;
+  max-width: 58px;
+  color: #8c7b70;
+  font-size: 0.56rem;
+  font-weight: 850;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featured-grade.down {
+  color: #d14f62 !important;
+  background: #fff0f2 !important;
+}
+
+.live-tobeol-single {
+  grid-template-columns: 1fr !important;
+}
+
+.live-tobeol-panel.unified {
+  width: 100%;
+}
+
+.hidden-live-list {
+  display: none !important;
+}
+
+.live-tobeol-list.unified-list {
+  display: grid;
+  gap: 7px;
+  padding: 0 12px 12px;
+}
+
+.live-member-row {
+  display: grid;
+  grid-template-columns: 30px 54px minmax(0, 1fr) auto minmax(96px, 0.68fr);
+  grid-template-areas: "rank avatar info pill score";
+  align-items: center;
+  gap: 8px;
+  min-height: 66px;
+  padding: 8px 10px;
+  border: 1px solid rgba(231, 220, 211, 0.96);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 8px rgba(140, 107, 92, 0.05);
+}
+
+.live-member-row .featured-rank {
+  grid-area: rank !important;
+}
+
+.live-member-row .featured-avatar-wrap {
+  grid-area: avatar !important;
+  width: 54px !important;
+  height: 54px !important;
+}
+
+.live-member-row .featured-info {
+  grid-area: info !important;
+}
+
+.live-member-row .featured-pill {
+  grid-area: pill !important;
+  justify-self: center !important;
+}
+
+.live-member-row .featured-score-box {
+  grid-area: score !important;
+  display: grid !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  text-align: left !important;
+}
+
+.live-member-row .featured-score-box strong {
+  color: #e15474 !important;
+  font-size: 0.94rem !important;
+  font-weight: 1000 !important;
+  line-height: 1.08 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.live-member-row.is-missed .featured-score-box strong {
+  color: #4d423d !important;
+}
+
+.live-member-row .featured-score-box span,
+.live-member-row .featured-score-box small {
+  color: #9b8a80 !important;
+  font-size: 0.57rem !important;
+  font-weight: 850 !important;
+  line-height: 1.05 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+@media (max-width: 390px) {
+  .featured-member-item.power-row {
+    grid-template-columns: 26px 48px minmax(0, 1fr) minmax(78px, 0.7fr) 44px !important;
+    min-height: 70px !important;
+  }
+
+  .power-row .featured-avatar-wrap {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .power-row .featured-name {
+    font-size: 0.86rem !important;
+  }
+
+  .power-score strong {
+    font-size: 0.78rem !important;
+  }
+
+  .featured-growth-value {
+    max-width: 44px;
+    font-size: 0.52rem;
+  }
+
+  .live-member-row {
+    grid-template-columns: 26px 48px minmax(0, 1fr) 42px minmax(76px, 0.62fr);
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .live-member-row .featured-avatar-wrap {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .live-member-row .featured-score-box strong {
+    font-size: 0.84rem !important;
+  }
+}

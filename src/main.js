@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.29.0";
+const APP_VERSION = "v1.30.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -769,16 +769,17 @@ function updateLiveTobeolSourceLink() {
 function renderLiveTobeolResults() {
   if (!refs.liveTobeolSummary || !refs.liveTobeolMissList || !refs.liveTobeolHitList) return;
 
+  refs.liveTobeolHitList.innerHTML = "";
+
   if (state.liveTobeolLoading) {
     refs.liveTobeolSummary.innerHTML = `
       <article class="live-summary-card loading">
         <span>실시간 조회 중</span>
-        <strong>MGF 확인 중...</strong>
+        <strong>확인 중...</strong>
         <small>길드원과 토벌전 랭킹을 새로 가져오고 있습니다.</small>
       </article>
     `;
     refs.liveTobeolMissList.innerHTML = `<div class="live-empty">잠시만 기다려주세요.</div>`;
-    refs.liveTobeolHitList.innerHTML = `<div class="live-empty">조회 중입니다.</div>`;
     return;
   }
 
@@ -791,7 +792,6 @@ function renderLiveTobeolResults() {
       </article>
     `;
     refs.liveTobeolMissList.innerHTML = `<div class="live-empty">Cloudflare Pages 배포 또는 npm run serve로 실행했는지 확인해주세요.</div>`;
-    refs.liveTobeolHitList.innerHTML = `<div class="live-empty">다시 조회를 눌러주세요.</div>`;
     return;
   }
 
@@ -804,22 +804,21 @@ function renderLiveTobeolResults() {
         <small>기본값은 lovely / 서버 4입니다.</small>
       </article>
     `;
-    refs.liveTobeolMissList.innerHTML = `<div class="live-empty">조회 후 미참여 인원이 여기에 표시됩니다.</div>`;
-    refs.liveTobeolHitList.innerHTML = `<div class="live-empty">조회 후 참여 인원이 여기에 표시됩니다.</div>`;
+    refs.liveTobeolMissList.innerHTML = `<div class="live-empty">조회 후 길드원 전체가 참여/미참여 상태로 표시됩니다.</div>`;
     return;
   }
 
   const summary = data.summary || {};
   refs.liveTobeolSummary.innerHTML = `
-    <article class="live-summary-card missed">
-      <span>미참여</span>
-      <strong>${Number(summary.missedCount || 0)}명</strong>
-      <small>현재 토벌 점수 미확인</small>
-    </article>
     <article class="live-summary-card hit">
       <span>참여</span>
       <strong>${Number(summary.hitCount || 0)}명</strong>
       <small>참여율 ${escapeHtml(String(summary.hitRate ?? 0))}%</small>
+    </article>
+    <article class="live-summary-card missed">
+      <span>미참여</span>
+      <strong>${Number(summary.missedCount || 0)}명</strong>
+      <small>현재 토벌 점수 미확인</small>
     </article>
     <article class="live-summary-card total">
       <span>총 토벌전</span>
@@ -828,41 +827,41 @@ function renderLiveTobeolResults() {
     </article>
   `;
 
-  const missedMembers = Array.isArray(data.missedMembers) ? data.missedMembers : [];
-  const hitMembers = Array.isArray(data.hitMembers) ? data.hitMembers : [];
+  const missedMembers = Array.isArray(data.missedMembers) ? data.missedMembers.map((member) => ({ ...member, __tobeolStatus: "missed" })) : [];
+  const hitMembers = Array.isArray(data.hitMembers) ? data.hitMembers.map((member) => ({ ...member, __tobeolStatus: "hit" })) : [];
+  const allMembers = [...hitMembers, ...missedMembers].sort((a, b) => Number(a.rank || 9999) - Number(b.rank || 9999));
 
-  refs.liveTobeolMissList.innerHTML = missedMembers.length
-    ? missedMembers.map((member) => renderLiveTobeolMember(member, "missed")).join("")
-    : `<div class="live-empty success">전원 토벌전 참여 확인!</div>`;
-
-  refs.liveTobeolHitList.innerHTML = hitMembers.length
-    ? hitMembers.map((member) => renderLiveTobeolMember(member, "hit")).join("")
-    : `<div class="live-empty">아직 참여자가 확인되지 않았습니다.</div>`;
+  refs.liveTobeolMissList.innerHTML = allMembers.length
+    ? allMembers.map((member) => renderLiveTobeolMember(member, member.__tobeolStatus)).join("")
+    : `<div class="live-empty">표시할 길드원이 없습니다.</div>`;
 }
 
 function renderLiveTobeolMember(member, type) {
   const isHit = type === "hit";
   const imageUrl = getCharacterImageUrl(member.nickname);
   const statusText = isHit ? "참여" : "미참여";
+  const rank = member.rank || "-";
+  const scoreText = isHit ? (member.tobeolText || "0") : "—";
+  const detailText = isHit && member.tobeolRank ? `토벌 랭킹 #${escapeHtml(member.tobeolRank)}` : "기록 없음";
+
   return `
-    <div class="live-member ${isHit ? "is-hit" : "is-missed"}">
-      <div class="live-member-main">
-        <span class="live-rank ${member.rank && Number(member.rank) <= 3 ? `top-${escapeAttr(String(member.rank))}` : ""}">#${escapeHtml(member.rank || "-")}</span>
-        <div class="live-avatar-wrap">
-          <img class="live-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
-          <span class="live-avatar-fallback">🌸</span>
-        </div>
-        <div class="live-member-namebox">
-          <strong>${escapeHtml(member.nickname || "-")}</strong>
-          <small>${escapeHtml(member.job || "-")} · Lv.${escapeHtml(member.level || "-")}</small>
-        </div>
+    <article class="live-member-row ${isHit ? "is-hit" : "is-missed"}">
+      <div class="featured-rank ${rank && Number(rank) <= 3 ? `top-${escapeAttr(String(rank))}` : ""}">${escapeHtml(rank)}</div>
+      <div class="featured-avatar-wrap">
+        <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
+        <span class="featured-avatar-fallback">🌸</span>
       </div>
-      <div class="live-member-score ${isHit ? "score-hit" : "score-missed"}">
-        <span class="live-state-pill ${isHit ? "is-hit" : "is-missed"}">${statusText}</span>
-        <strong>${isHit ? escapeHtml(member.tobeolText || "0") : "기록 없음"}</strong>
-        ${isHit && member.tobeolRank ? `<small>토벌 랭킹 #${escapeHtml(member.tobeolRank)}</small>` : `<small>이번 주 점수 미확인</small>`}
+      <div class="featured-info">
+        <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
+        <small class="featured-meta">Lv.${escapeHtml(member.level || "-")}${member.job ? ` · ${escapeHtml(member.job)}` : ""}</small>
       </div>
-    </div>
+      <span class="featured-pill ${isHit ? "is-hit" : "is-missed"}">${statusText}</span>
+      <div class="featured-score-box tobeol-score">
+        <span>토벌전 점수</span>
+        <strong>${escapeHtml(scoreText)}</strong>
+        <small>${detailText}</small>
+      </div>
+    </article>
   `;
 }
 
@@ -3579,18 +3578,17 @@ function renderFeaturedMembers() {
 function renderFeaturedMemberItem(member, absoluteIndex) {
   const imageUrl = getCharacterImageUrl(member.nickname);
   const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
-  const tobeolValue = Number(member.tobeolValue || 0);
-  const hasTobeol = tobeolValue > 0;
-  const participationClass = hasTobeol ? "is-hit" : "is-missed";
-  const participationText = hasTobeol ? "참여" : "미참여";
-  const job = String(member.job || "-").replace(/(.+)\1$/, "$1");
-  const meta = `${job} | Lv.${member.level || "-"}`;
-  const scoreText = hasTobeol ? compactScore(member.tobeolValue, member.tobeolText) : "—";
-  const gradeText = !hasTobeol ? "기록 없음" : (tobeolValue >= 100000 ? "높음" : "보통");
-  const gradeClass = !hasTobeol ? "empty" : (tobeolValue >= 100000 ? "high" : "normal");
+  const currentPower = compactPowerText(member.powerText, member.powerValue);
+  const previousPower = member.previousPowerText ? compactPowerText(member.previousPowerText, member.previousPowerValue) : "비교 없음";
+  const growthRate = Number(member.powerGrowthRate);
+  const hasGrowthRate = Number.isFinite(growthRate);
+  const growthText = hasGrowthRate ? `${growthRate > 0 ? "+" : ""}${growthRate.toFixed(2)}%` : "비교 없음";
+  const growthClass = !hasGrowthRate ? "empty" : growthRate > 0 ? "high" : growthRate < 0 ? "down" : "normal";
+  const growthValue = member.powerGrowthText || formatSignedKoreanPower(member.powerGrowthValue);
+  const metaText = `Lv.${escapeHtml(member.level || "-")}${member.job ? ` · ${escapeHtml(member.job)}` : ""}`;
 
   return `
-    <article class="featured-member-item ${hasTobeol ? "has-score" : "no-score"}">
+    <article class="featured-member-item power-row">
       <div class="featured-rank ${Number(rank) <= 3 ? `top-${escapeAttr(String(rank))}` : ""}">${escapeHtml(rank)}</div>
       <div class="featured-avatar-wrap">
         <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
@@ -3598,23 +3596,25 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
       </div>
       <div class="featured-info">
         <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
-        <small class="featured-meta">${escapeHtml(meta)}</small>
+        <small class="featured-meta">${metaText}</small>
       </div>
-      <span class="featured-pill ${participationClass}">${participationText}</span>
-      <div class="featured-score-box">
-        <span>토벌전 점수</span>
-        <strong>${escapeHtml(scoreText)}</strong>
+      <div class="featured-score-box power-score">
+        <span>현재 전투력</span>
+        <strong>${escapeHtml(currentPower)}</strong>
+        <small>7일 전 ${escapeHtml(previousPower)}</small>
       </div>
-      <span class="featured-grade ${gradeClass}">${escapeHtml(gradeText)}</span>
+      <span class="featured-grade ${growthClass}">${escapeHtml(growthText)}</span>
+      <small class="featured-growth-value">${escapeHtml(growthValue || "-")}</small>
     </article>
   `;
 }
 
-function compactScore(value, fallbackText = "-") {
-  const n = Number(value || 0);
-  if (!Number.isFinite(n) || n <= 0) return fallbackText || "0";
-  if (n < 10000000) return Math.floor(n).toLocaleString("ko-KR");
-  return shortNumberKorean(n, fallbackText);
+function compactPowerText(text, value) {
+  const source = String(text || formatKoreanPower(value) || "-").replace(/,/g, "").trim();
+  if (!source || source === "-") return "-";
+  const unitParts = source.match(/\d+(?:\.\d+)?\s*(?:경|조|억|만)/g);
+  if (unitParts?.length) return unitParts.slice(0, 2).join(" ");
+  return source;
 }
 
 function shortNumberKorean(value, fallbackText = "-") {

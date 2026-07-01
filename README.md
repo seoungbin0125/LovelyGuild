@@ -1,8 +1,8 @@
 # Lovely 길드 포털
 
-현재 버전: **v1.29.0**
+현재 버전: **v1.30.0**
 
-Lovely 길드용 대시보드입니다. 전투력/토벌전 현황, 캐릭터 모아보기, 길드 컨텐츠, 핫딜, 그리고 **실시간 토벌전 참여 확인** 기능이 포함되어 있습니다. v1.29.0부터 Lovely 전용 다크 네온 디자인을 적용했고, 광장/쉬어가기 탭은 숨겼습니다.
+Lovely 길드용 대시보드입니다. 전투력/토벌전 현황, 캐릭터 모아보기, 길드 컨텐츠, 핫딜, 그리고 **실시간 토벌전 참여 확인** 기능이 포함되어 있습니다. v1.30.0부터 Lovely 전용 다크 네온 디자인을 적용했고, 광장/쉬어가기 탭은 숨겼습니다.
 
 ## 로컬 새 프로젝트 폴더
 
@@ -16,7 +16,7 @@ Lovely 길드용 대시보드입니다. 전투력/토벌전 현황, 캐릭터 �
 
 ```bash
 cd ~/Downloads
-unzip lovely-guild-dashboard-v1.29.0.zip
+unzip lovely-guild-dashboard-v1.30.0.zip
 rsync -av --delete --exclude .git lovely-guild-dashboard/ /Users/bin/Desktop/work/lovely-guild-dashboard/
 ```
 
@@ -117,6 +117,6 @@ Cloudflare Pages에 올리면 `functions/api/tobeol.js`가 같은 역할을 합�
 
 핫딜만 별도로 매시간 갱신하는 `.github/workflows/collect-hotdeals.yml`도 포함되어 있습니다.
 
-## v1.29.0 핫딜 수집 주의
+## v1.30.0 핫딜 수집 주의
 
 아카라이브가 GitHub Actions 서버 요청을 403으로 차단할 수 있어, `collect:hotdeals`는 실패해도 전체 자동 수집이 깨지지 않도록 안전 처리합니다. 실패 시 `data/hotdeals.json`에 실패 사유를 기록하고 기존 목록 또는 빈 목록을 유지합니다.
