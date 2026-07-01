@@ -1,7 +1,8 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.18.0";
+const APP_VERSION = "v1.19.0";
+const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
 const LOCAL_POSTS_KEY = "lovely-guild-dashboard.guide-posts.v1";
@@ -700,7 +701,7 @@ async function searchLiveTobeol() {
   renderLiveTobeolResults();
 
   try {
-    const url = `/api/tobeol?guild=${encodeURIComponent(guild)}&server=${encodeURIComponent(server)}&maxPage=20&ts=${Date.now()}`;
+    const url = makeLiveTobeolApiUrl(guild, server);
     const response = await fetch(url, { cache: "no-store" });
     const payload = await response.json().catch(() => null);
     if (!response.ok || !payload?.ok) {
@@ -714,6 +715,22 @@ async function searchLiveTobeol() {
     state.liveTobeolLoading = false;
     renderLiveTobeolResults();
   }
+}
+
+function makeLiveTobeolApiUrl(guild, server) {
+  const params = new URLSearchParams({
+    guild: guild || "lovely",
+    server: server || "4",
+    maxPage: "20",
+    ts: String(Date.now())
+  });
+
+  const host = window.location.hostname || "";
+  const isLocal = host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0";
+  const isCloudflarePages = host.endsWith(".pages.dev");
+  const apiOrigin = isLocal || isCloudflarePages ? "" : LIVE_TOBEOL_API_ORIGIN;
+
+  return `${apiOrigin}/api/tobeol?${params.toString()}`;
 }
 
 function updateLiveTobeolSourceLink() {

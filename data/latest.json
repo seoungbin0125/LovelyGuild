@@ -1,7 +1,7 @@
 {
   "ok": true,
   "version": 5,
-  "appVersion": "v1.18.0",
+  "appVersion": "v1.19.0",
   "guilds": [
     "LOVELY"
   ],
@@ -19,10 +19,11 @@
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
   },
   "summary": {
-    "guildCount": 1,
     "memberCount": 30,
     "totalPowerValue": 11325294996040000,
-    "totalTobeolValue": 432378720000
+    "totalPowerText": "1경 1325조 2949억 9604만",
+    "totalTobeolValue": 0,
+    "totalTobeolText": "0"
   },
   "manualAppliedCount": 0,
   "memberChanges": {
@@ -37,9 +38,7 @@
           "job": "섀도어",
           "level": 110,
           "powerValue": 1186535699540000,
-          "powerText": "1186조 5356억 9954만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "1186조 5356억 9954만"
         },
         {
           "guild": "LOVELY",
@@ -48,9 +47,7 @@
           "job": "다크나이트",
           "level": 110,
           "powerValue": 982439748440000,
-          "powerText": "982조 4397억 4844만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "982조 4397억 4844만"
         },
         {
           "guild": "LOVELY",
@@ -59,9 +56,7 @@
           "job": "비숍",
           "level": 111,
           "powerValue": 871455823670000,
-          "powerText": "871조 4558억 2367만",
-          "tobeolValue": 24632160000,
-          "tobeolText": "246억 3216만"
+          "powerText": "871조 4558억 2367만"
         },
         {
           "guild": "LOVELY",
@@ -70,9 +65,7 @@
           "job": "히어로",
           "level": 111,
           "powerValue": 851131351230000,
-          "powerText": "851조 1313억 5123만",
-          "tobeolValue": 72571410000,
-          "tobeolText": "725억 7141만"
+          "powerText": "851조 1313억 5123만"
         },
         {
           "guild": "LOVELY",
@@ -81,9 +74,7 @@
           "job": "비숍",
           "level": 110,
           "powerValue": 760296329090000,
-          "powerText": "760조 2963억 2909만",
-          "tobeolValue": 45942030000,
-          "tobeolText": "459억 4203만"
+          "powerText": "760조 2963억 2909만"
         },
         {
           "guild": "LOVELY",
@@ -92,9 +83,7 @@
           "job": "섀도어",
           "level": 110,
           "powerValue": 736455978650000,
-          "powerText": "736조 4559억 7865만",
-          "tobeolValue": 30574890000,
-          "tobeolText": "305억 7489만"
+          "powerText": "736조 4559억 7865만"
         },
         {
           "guild": "LOVELY",
@@ -103,9 +92,7 @@
           "job": "히어로",
           "level": 109,
           "powerValue": 588581819170000,
-          "powerText": "588조 5818억 1917만",
-          "tobeolValue": 38578030000,
-          "tobeolText": "385억 7803만"
+          "powerText": "588조 5818억 1917만"
         },
         {
           "guild": "LOVELY",
@@ -114,9 +101,7 @@
           "job": "비숍",
           "level": 108,
           "powerValue": 588567917300000,
-          "powerText": "588조 5679억 1730만",
-          "tobeolValue": 18573760000,
-          "tobeolText": "185억 7376만"
+          "powerText": "588조 5679억 1730만"
         },
         {
           "guild": "LOVELY",
@@ -125,9 +110,7 @@
           "job": "비숍",
           "level": 110,
           "powerValue": 549758361950000,
-          "powerText": "549조 7583억 6195만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "549조 7583억 6195만"
         },
         {
           "guild": "LOVELY",
@@ -136,9 +119,7 @@
           "job": "다크나이트",
           "level": 108,
           "powerValue": 446076482340000,
-          "powerText": "446조 764억 8234만",
-          "tobeolValue": 13732680000,
-          "tobeolText": "137억 3268만"
+          "powerText": "446조 764억 8234만"
         },
         {
           "guild": "LOVELY",
@@ -147,9 +128,7 @@
           "job": "히어로",
           "level": 110,
           "powerValue": 418463254490000,
-          "powerText": "418조 4632억 5449만",
-          "tobeolValue": 28183710000,
-          "tobeolText": "281억 8371만"
+          "powerText": "418조 4632억 5449만"
         },
         {
           "guild": "LOVELY",
@@ -158,9 +137,7 @@
           "job": "신궁",
           "level": 109,
           "powerValue": 355578891720000,
-          "powerText": "355조 5788억 9172만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "355조 5788억 9172만"
         },
         {
           "guild": "LOVELY",
@@ -169,9 +146,7 @@
           "job": "섀도어",
           "level": 108,
           "powerValue": 276543884020000,
-          "powerText": "276조 5438억 8402만",
-          "tobeolValue": 14090060000,
-          "tobeolText": "140억 9006만"
+          "powerText": "276조 5438억 8402만"
         },
         {
           "guild": "LOVELY",
@@ -180,9 +155,7 @@
           "job": "섀도어",
           "level": 109,
           "powerValue": 264787222970000,
-          "powerText": "264조 7872억 2297만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "264조 7872억 2297만"
         },
         {
           "guild": "LOVELY",
@@ -191,9 +164,7 @@
           "job": "섀도어",
           "level": 108,
           "powerValue": 256998654720000,
-          "powerText": "256조 9986억 5472만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "256조 9986억 5472만"
         },
         {
           "guild": "LOVELY",
@@ -202,9 +173,7 @@
           "job": "섀도어",
           "level": 106,
           "powerValue": 233523492710000,
-          "powerText": "233조 5234억 9271만",
-          "tobeolValue": 12842940000,
-          "tobeolText": "128억 4294만"
+          "powerText": "233조 5234억 9271만"
         },
         {
           "guild": "LOVELY",
@@ -213,9 +182,7 @@
           "job": "섀도어",
           "level": 108,
           "powerValue": 213762197010000,
-          "powerText": "213조 7621억 9701만",
-          "tobeolValue": 16731070000,
-          "tobeolText": "167억 3107만"
+          "powerText": "213조 7621억 9701만"
         },
         {
           "guild": "LOVELY",
@@ -224,9 +191,7 @@
           "job": "섀도어",
           "level": 107,
           "powerValue": 206596238420000,
-          "powerText": "206조 5962억 3842만",
-          "tobeolValue": 12198440000,
-          "tobeolText": "121억 9844만"
+          "powerText": "206조 5962억 3842만"
         },
         {
           "guild": "LOVELY",
@@ -235,9 +200,7 @@
           "job": "다크나이트",
           "level": 107,
           "powerValue": 181665631520000,
-          "powerText": "181조 6656억 3152만",
-          "tobeolValue": 10998550000,
-          "tobeolText": "109억 9855만"
+          "powerText": "181조 6656억 3152만"
         },
         {
           "guild": "LOVELY",
@@ -246,9 +209,7 @@
           "job": "신궁",
           "level": 107,
           "powerValue": 176929864440000,
-          "powerText": "176조 9298억 6444만",
-          "tobeolValue": 10877790000,
-          "tobeolText": "108억 7779만"
+          "powerText": "176조 9298억 6444만"
         },
         {
           "guild": "LOVELY",
@@ -257,9 +218,7 @@
           "job": "아크메이지(썬,콜)",
           "level": 107,
           "powerValue": 160236783370000,
-          "powerText": "160조 2367억 8337만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "160조 2367억 8337만"
         },
         {
           "guild": "LOVELY",
@@ -268,9 +227,7 @@
           "job": "섀도어",
           "level": 108,
           "powerValue": 157036475510000,
-          "powerText": "157조 364억 7551만",
-          "tobeolValue": 12817800000,
-          "tobeolText": "128억 1780만"
+          "powerText": "157조 364억 7551만"
         },
         {
           "guild": "LOVELY",
@@ -279,9 +236,7 @@
           "job": "아크메이지(썬,콜)",
           "level": 107,
           "powerValue": 139817142330000,
-          "powerText": "139조 8171억 4233만",
-          "tobeolValue": 12761210000,
-          "tobeolText": "127억 6121만"
+          "powerText": "139조 8171억 4233만"
         },
         {
           "guild": "LOVELY",
@@ -290,9 +245,7 @@
           "job": "섀도어",
           "level": 106,
           "powerValue": 128227077420000,
-          "powerText": "128조 2270억 7742만",
-          "tobeolValue": 11956210000,
-          "tobeolText": "119억 5621만"
+          "powerText": "128조 2270억 7742만"
         },
         {
           "guild": "LOVELY",
@@ -301,9 +254,7 @@
           "job": "섀도어",
           "level": 106,
           "powerValue": 124213937000000,
-          "powerText": "124조 2139억 3700만",
-          "tobeolValue": 10053520000,
-          "tobeolText": "100억 5352만"
+          "powerText": "124조 2139억 3700만"
         },
         {
           "guild": "LOVELY",
@@ -312,9 +263,7 @@
           "job": "신궁",
           "level": 107,
           "powerValue": 122721446630000,
-          "powerText": "122조 7214억 4663만",
-          "tobeolValue": 13048430000,
-          "tobeolText": "130억 4843만"
+          "powerText": "122조 7214억 4663만"
         },
         {
           "guild": "LOVELY",
@@ -323,9 +272,7 @@
           "job": "섀도어",
           "level": 106,
           "powerValue": 103659659330000,
-          "powerText": "103조 6596억 5933만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "103조 6596억 5933만"
         },
         {
           "guild": "LOVELY",
@@ -334,9 +281,7 @@
           "job": "비숍",
           "level": 105,
           "powerValue": 96972629770000,
-          "powerText": "96조 9726억 2977만",
-          "tobeolValue": 9459300000,
-          "tobeolText": "94억 5930만"
+          "powerText": "96조 9726억 2977만"
         },
         {
           "guild": "LOVELY",
@@ -345,9 +290,7 @@
           "job": "섀도어",
           "level": 106,
           "powerValue": 75050143360000,
-          "powerText": "75조 501억 4336만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
+          "powerText": "75조 501억 4336만"
         },
         {
           "guild": "LOVELY",
@@ -356,9 +299,7 @@
           "job": "팔라딘",
           "level": 106,
           "powerValue": 71210857920000,
-          "powerText": "71조 2108억 5792만",
-          "tobeolValue": 11754730000,
-          "tobeolText": "117억 5473만"
+          "powerText": "71조 2108억 5792만"
         }
       ],
       "departedMembers": []
@@ -367,10 +308,11 @@
   "departedMembers": [],
   "guildSummaries": {
     "LOVELY": {
-      "guildCount": 1,
       "memberCount": 30,
       "totalPowerValue": 11325294996040000,
-      "totalTobeolValue": 432378720000
+      "totalPowerText": "1경 1325조 2949억 9604만",
+      "totalTobeolValue": 0,
+      "totalTobeolText": "0"
     }
   },
   "members": [
@@ -435,8 +377,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 24632160000,
-      "tobeolText": "246억 3216만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -458,8 +400,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 72571410000,
-      "tobeolText": "725억 7141만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -481,8 +423,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 45942030000,
-      "tobeolText": "459억 4203만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -504,8 +446,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 30574890000,
-      "tobeolText": "305억 7489만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -527,8 +469,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 38578030000,
-      "tobeolText": "385억 7803만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -550,8 +492,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 18573760000,
-      "tobeolText": "185억 7376만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -596,8 +538,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 13732680000,
-      "tobeolText": "137억 3268만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -619,8 +561,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 28183710000,
-      "tobeolText": "281억 8371만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -665,8 +607,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 14090060000,
-      "tobeolText": "140억 9006만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -734,8 +676,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 12842940000,
-      "tobeolText": "128억 4294만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -757,8 +699,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 16731070000,
-      "tobeolText": "167억 3107만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -780,8 +722,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 12198440000,
-      "tobeolText": "121억 9844만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -803,8 +745,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 10998550000,
-      "tobeolText": "109억 9855만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -826,8 +768,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 10877790000,
-      "tobeolText": "108억 7779만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -872,8 +814,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 12817800000,
-      "tobeolText": "128억 1780만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -895,8 +837,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 12761210000,
-      "tobeolText": "127억 6121만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -918,8 +860,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 11956210000,
-      "tobeolText": "119억 5621만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -941,8 +883,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 10053520000,
-      "tobeolText": "100억 5352만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -964,8 +906,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 13048430000,
-      "tobeolText": "130억 4843만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -1010,8 +952,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 9459300000,
-      "tobeolText": "94억 5930만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
@@ -1056,8 +998,8 @@
       "powerGrowthValue": null,
       "powerGrowthText": null,
       "powerGrowthRate": null,
-      "tobeolValue": 11754730000,
-      "tobeolText": "117억 5473만",
+      "tobeolValue": 0,
+      "tobeolText": "0",
       "previousTobeolValue": null,
       "previousTobeolText": null,
       "tobeolGrowthValue": null,
