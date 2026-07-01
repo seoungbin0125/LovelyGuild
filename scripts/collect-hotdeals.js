@@ -242,17 +242,28 @@ function kstDateTimeString() {
 }
 
 run().catch(async (error) => {
-  console.error(`❌ 핫딜 수집 실패: ${error.message}`);
+  console.error(`⚠️ 핫딜 수집 실패: ${error.message}`);
   await fs.mkdir(DATA_DIR, { recursive: true });
+
   const fallback = await readExistingOutput();
-  if (fallback) {
-    fallback.ok = false;
-    fallback.error = error.message;
-    fallback.lastFailedAt = kstDateTimeString();
-    await fs.writeFile(OUTPUT_PATH, `${JSON.stringify(fallback, null, 2)}\n`, "utf8");
+  fallback.ok = false;
+  fallback.error = error.message;
+  fallback.lastFailedAt = kstDateTimeString();
+  fallback.notice = isBlockedFetchError(error)
+    ? "arca.live가 GitHub Actions/서버 요청을 403으로 차단했습니다. 기존 데이터 또는 빈 목록을 유지하고 전체 대시보드 수집은 계속 진행합니다."
+    : "핫딜 수집에 실패했습니다. 기존 데이터 또는 빈 목록을 유지하고 전체 대시보드 수집은 계속 진행합니다.";
+
+  await fs.writeFile(OUTPUT_PATH, `${JSON.stringify(fallback, null, 2)}\n`, "utf8");
+  console.log(`🧯 핫딜 수집 실패를 안전 처리했습니다. 대시보드 자동 수집은 실패 처리하지 않습니다. → ${OUTPUT_PATH}`);
+
+  if (process.env.HOTDEAL_STRICT === "1") {
+    process.exitCode = 1;
   }
-  process.exitCode = 1;
 });
+
+function isBlockedFetchError(error) {
+  return /\b403\b|forbidden|access denied|차단/i.test(String(error?.message || error));
+}
 
 async function readExistingOutput() {
   try {
