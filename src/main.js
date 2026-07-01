@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.27.0";
+const APP_VERSION = "v1.28.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -3579,11 +3579,18 @@ function renderFeaturedMembers() {
 function renderFeaturedMemberItem(member, absoluteIndex) {
   const imageUrl = getCharacterImageUrl(member.nickname);
   const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
-  const participationClass = Number(member.tobeolValue || 0) > 0 ? "is-hit" : "is-missed";
-  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참여";
+  const tobeolValue = Number(member.tobeolValue || 0);
+  const hasTobeol = tobeolValue > 0;
+  const participationClass = hasTobeol ? "is-hit" : "is-missed";
+  const participationText = hasTobeol ? "참여" : "미참여";
+  const jobText = escapeHtml(member.job || "-");
+  const levelText = `Lv.${escapeHtml(member.level || "-")}`;
+  const scoreText = hasTobeol ? escapeHtml(member.tobeolText || shortNumberKorean(tobeolValue)) : "—";
+  const gradeText = !hasTobeol ? "기록 없음" : (tobeolValue >= 100000 ? "높음" : "보통");
+  const gradeClass = !hasTobeol ? "empty" : (tobeolValue >= 100000 ? "high" : "normal");
 
   return `
-    <article class="featured-member-item">
+    <article class="featured-member-item ${hasTobeol ? "has-score" : "no-score"}">
       <div class="featured-rank ${Number(rank) <= 3 ? `top-${escapeAttr(String(rank))}` : ""}">${escapeHtml(rank)}</div>
       <div class="featured-avatar-wrap">
         <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
@@ -3591,13 +3598,14 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
       </div>
       <div class="featured-info">
         <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
-        <small class="featured-level">Lv.${escapeHtml(member.level || "-")}</small>
+        <small class="featured-meta">${jobText} | ${levelText}</small>
       </div>
       <span class="featured-pill ${participationClass}">${participationText}</span>
-      <div class="featured-power-box">
-        <span>전투력</span>
-        <strong>${escapeHtml(shortNumberKorean(member.powerValue || 0, member.powerText))}</strong>
+      <div class="featured-score-box">
+        <span>토벌전 점수</span>
+        <strong>${scoreText}</strong>
       </div>
+      <span class="featured-grade ${gradeClass}">${gradeText}</span>
     </article>
   `;
 }
