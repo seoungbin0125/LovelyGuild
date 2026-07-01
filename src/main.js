@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.26.0";
+const APP_VERSION = "v1.27.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -302,11 +302,11 @@ function bindEvents() {
   });
 
   refs.featuredPrev?.addEventListener("click", () => {
-    moveFeaturedWindow(-6);
+    moveFeaturedWindow(-5);
   });
 
   refs.featuredNext?.addEventListener("click", () => {
-    moveFeaturedWindow(6);
+    moveFeaturedWindow(5);
   });
 
   refs.visualGuildFilter?.addEventListener("change", (event) => {
@@ -3566,7 +3566,7 @@ function renderFeaturedMembers() {
     return;
   }
 
-  const pageSize = 6;
+  const pageSize = 5;
   const maxStart = Math.max(0, Math.floor((members.length - 1) / pageSize) * pageSize);
   if (state.featuredStartIndex > maxStart) state.featuredStartIndex = maxStart;
   const windowMembers = members.slice(state.featuredStartIndex, state.featuredStartIndex + pageSize);
@@ -3580,7 +3580,7 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
   const imageUrl = getCharacterImageUrl(member.nickname);
   const rank = member.rank ? `${member.rank}` : `${absoluteIndex + 1}`;
   const participationClass = Number(member.tobeolValue || 0) > 0 ? "is-hit" : "is-missed";
-  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참";
+  const participationText = Number(member.tobeolValue || 0) > 0 ? "참여" : "미참여";
 
   return `
     <article class="featured-member-item">
@@ -3589,13 +3589,15 @@ function renderFeaturedMemberItem(member, absoluteIndex) {
         <img class="featured-avatar" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(member.nickname || "캐릭터")}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'; this.parentElement.classList.add('is-missing');" />
         <span class="featured-avatar-fallback">🌸</span>
       </div>
-      <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
-      <small class="featured-level">Lv.${escapeHtml(member.level || "-")}</small>
+      <div class="featured-info">
+        <strong class="featured-name">${escapeHtml(member.nickname || "-")}</strong>
+        <small class="featured-level">Lv.${escapeHtml(member.level || "-")}</small>
+      </div>
+      <span class="featured-pill ${participationClass}">${participationText}</span>
       <div class="featured-power-box">
         <span>전투력</span>
         <strong>${escapeHtml(shortNumberKorean(member.powerValue || 0, member.powerText))}</strong>
       </div>
-      <span class="featured-pill ${participationClass}">${participationText}</span>
     </article>
   `;
 }

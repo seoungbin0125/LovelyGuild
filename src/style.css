@@ -7577,3 +7577,133 @@ footer.hidden-footer {
     font-size: 0.76rem;
   }
 }
+
+/* v1.27.0 mobile member rows */
+.featured-member-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.featured-member-item {
+  display: grid;
+  grid-template-columns: 34px 60px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+.featured-rank {
+  width: 34px;
+  height: 34px;
+  font-size: 0.86rem;
+}
+
+.featured-avatar-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+}
+
+.featured-avatar {
+  transform: scale(1.22);
+}
+
+.featured-info {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.featured-name {
+  min-height: auto;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.featured-level {
+  font-size: 0.76rem;
+}
+
+.featured-pill {
+  justify-self: end;
+}
+
+.featured-power-box {
+  grid-column: 3 / 5;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+
+.featured-power-box span {
+  font-size: 0.72rem;
+}
+
+.featured-power-box strong {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .featured-member-list {
+    gap: 8px;
+  }
+
+  .featured-member-item {
+    grid-template-columns: 30px 56px minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 18px;
+  }
+
+  .featured-rank {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+
+  .featured-avatar-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+  }
+
+  .featured-name {
+    font-size: 0.96rem;
+  }
+
+  .featured-level {
+    font-size: 0.72rem;
+  }
+
+  .featured-pill {
+    min-height: 26px;
+    padding: 0 10px;
+    font-size: 0.66rem;
+  }
+
+  .featured-power-box {
+    grid-column: 3 / 5;
+    padding: 7px 9px;
+  }
+
+  .featured-power-box span {
+    font-size: 0.68rem;
+  }
+
+  .featured-power-box strong {
+    font-size: 0.92rem;
+  }
+}
