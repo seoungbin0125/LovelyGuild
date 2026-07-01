@@ -1,7 +1,7 @@
 import { FIREBASE_COLLECTION, FIREBASE_CONFIG, FIREBASE_GAME_COLLECTION, FIREBASE_LOBBY_COLLECTION, FIREBASE_MANUAL_COLLECTION } from "./firebase-config.js";
 import { createGuideBoardClient, createJellyGameClient, createManualOverrideClient, createVirtualLobbyClient, isFirebaseConfigured } from "./firebase-board.js";
 
-const APP_VERSION = "v1.20.0";
+const APP_VERSION = "v1.21.0";
 const LIVE_TOBEOL_API_ORIGIN = "https://lovely-guild-dashboard.pages.dev";
 const EDIT_PASSWORD = "5645";
 const LOCAL_MANUAL_KEY = "lovely-guild-dashboard.manual.v1";
@@ -41,10 +41,10 @@ const state = {
   boardMode: isFirebaseConfigured(FIREBASE_CONFIG) ? "firebase" : "local",
   boardLoaded: false,
   page: "dashboard",
-  tab: "power",
+  tab: "tobeol",
   guildFilter: "all",
   keyword: "",
-  sort: "powerGrowth",
+  sort: "tobeol",
   visualGuildFilter: "all",
   visualKeyword: "",
   visualSort: "powerGrowth",
@@ -251,6 +251,11 @@ function bindEvents() {
   refs.mainTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       state.page = tab.dataset.page;
+      if (tab.dataset.metricTab) {
+        state.tab = tab.dataset.metricTab;
+        refs.tabs.forEach((item) => item.classList.toggle("active", item.dataset.tab === state.tab));
+        syncSortByTab();
+      }
       refs.mainTabs.forEach((item) => item.classList.toggle("active", item === tab));
       renderPage();
     });
@@ -1047,14 +1052,25 @@ function getActionsWorkflowUrl() {
 function renderSummary() {
   const members = getGuildFilteredMembers();
   const summary = buildSummary(members);
-  const changes = getMemberChangeSummary(state.data, state.guildFilter);
-  const cards = [
-    { label: "수집 기준", value: state.data?.capturedDate || "-", icon: "🗓️", tone: "soft" },
-    { label: "7일 전 기준", value: getComparisonDateText(state.data, state.guildFilter), icon: "⏪", tone: "soft" },
-    { label: "길드원", value: `${summary.memberCount || 0}명`, icon: "👥", tone: "primary" },
-    { label: "신규/탈퇴", value: `+${changes.newCount || 0} / -${changes.departedCount || 0}`, icon: "✨", tone: "accent" },
-    { label: "총 전투력", value: formatKoreanPower(summary.totalPowerValue || 0), icon: "⚡", tone: "featured" },
-    { label: "총 토벌전", value: formatKoreanPower(summary.totalTobeolValue || 0), icon: "🏹", tone: "featured" }
+  const isTobeol = state.tab === "tobeol";
+  const hitMembers = members.filter((member) => Number(member.tobeolValue || 0) > 0);
+  const missedCount = Math.max(0, members.length - hitMembers.length);
+  const avgTobeol = hitMembers.length
+    ? Math.round(hitMembers.reduce((sum, member) => sum + Number(member.tobeolValue || 0), 0) / hitMembers.length)
+    : 0;
+  const avgPower = members.length
+    ? Math.round(members.reduce((sum, member) => sum + Number(member.powerValue || 0), 0) / members.length)
+    : 0;
+  const cards = isTobeol ? [
+    { label: "참여 인원", value: `${hitMembers.length}명`, sub: `전체 ${members.length}명 중`, icon: "👥", tone: "green" },
+    { label: "미참여", value: `${missedCount}명`, sub: missedCount ? "아직 참여하지 않았어요" : "전원 참여 확인", icon: "🧡", tone: "orange" },
+    { label: "총 토벌 점수", value: formatKoreanPower(summary.totalTobeolValue || 0), sub: "이번 주 누적 점수", icon: "🏆", tone: "purple" },
+    { label: "평균 점수", value: formatKoreanPower(avgTobeol), sub: "참여자 기준 평균", icon: "⭐", tone: "blue" }
+  ] : [
+    { label: "길드원", value: `${summary.memberCount || 0}명`, sub: "현재 수집 인원", icon: "👥", tone: "green" },
+    { label: "수집 기준", value: state.data?.capturedDate || "-", sub: "MGF 최신 데이터", icon: "🗓️", tone: "orange" },
+    { label: "총 전투력", value: formatKoreanPower(summary.totalPowerValue || 0), sub: "길드 합산 전투력", icon: "⚡", tone: "purple" },
+    { label: "평균 전투력", value: formatKoreanPower(avgPower), sub: "길드원 평균", icon: "⭐", tone: "blue" }
   ];
 
   refs.summaryGrid.innerHTML = cards.map((card) => `
@@ -1064,6 +1080,7 @@ function renderSummary() {
         <div class="label">${escapeHtml(card.label)}</div>
       </div>
       <div class="value">${escapeHtml(card.value)}</div>
+      <div class="summary-sub">${escapeHtml(card.sub || "")}</div>
     </article>
   `).join("");
 }
