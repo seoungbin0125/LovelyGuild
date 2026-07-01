@@ -1,6 +1,6 @@
 {
   "name": "lovely-guild-dashboard",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,17 @@
     "collect:hotdeals": "node scripts/collect-hotdeals.js",
     "collect:all-data": "npm run collect:all && npm run collect:contents && npm run collect:hotdeals",
     "collect:mgf": "npm run collect:lovely",
-    "collect:dashboard": "npm run collect:all-data"
+    "collect:dashboard": "npm run collect:all-data",
+    "cf:login": "node scripts/cloudflare-pages.js login",
+    "cf:whoami": "npx wrangler whoami",
+    "cf:create": "node scripts/cloudflare-pages.js create",
+    "cf:deploy": "node scripts/cloudflare-pages.js deploy",
+    "cf:open": "node scripts/cloudflare-pages.js open",
+    "cf:tail": "node scripts/cloudflare-pages.js tail",
+    "cf:setup": "node scripts/cloudflare-pages.js setup",
+    "cf:build": "node scripts/cloudflare-pages.js build"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "wrangler": "latest"
+  }
 }

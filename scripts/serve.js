@@ -23,7 +23,7 @@ const mimeTypes = {
 
 const server = http.createServer(async (req, res) => {
   try {
-    const url = new URL(req.url, `http://localhost:${PORT}`);
+    const url = new URL(req.url, `https://lovely-guild-dashboard.pages.dev}`);
 
     if (url.pathname === "/api/tobeol") {
       try {
