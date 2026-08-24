@@ -6,14 +6,14 @@
     "LOVELY"
   ],
   "guild": "LOVELY",
-  "capturedDate": "2026-08-24",
+  "capturedDate": "2026-08-25",
   "comparisonMode": "weekly",
   "comparisonOffsetDays": -7,
-  "comparisonTargetDate": "2026-08-17",
+  "comparisonTargetDate": "2026-08-18",
   "comparisonDates": {
-    "LOVELY": "2026-08-17"
+    "LOVELY": "2026-08-18"
   },
-  "comparisonDateText": "LOVELY: 2026-08-17",
+  "comparisonDateText": "LOVELY: 2026-08-18",
   "dataSource": "MGF guild_info",
   "sourceUrls": {
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
