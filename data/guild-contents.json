@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-08-29",
+  "capturedAt": "2026-08-30",
   "source": "MGF.GG",
   "guilds": [
     {
@@ -20,7 +20,7 @@
         "boss": {
           "label": "보스대전",
           "url": "https://mgf.gg/contents/guild.php?mode=boss&stx=LOVELY",
-          "matchCount": 3,
+          "matchCount": 2,
           "guilds": []
         }
       }
