@@ -6,14 +6,14 @@
     "LOVELY"
   ],
   "guild": "LOVELY",
-  "capturedDate": "2026-10-31",
+  "capturedDate": "2026-11-01",
   "comparisonMode": "weekly",
   "comparisonOffsetDays": -7,
-  "comparisonTargetDate": "2026-10-24",
+  "comparisonTargetDate": "2026-10-25",
   "comparisonDates": {
-    "LOVELY": "2026-10-24"
+    "LOVELY": "2026-10-25"
   },
-  "comparisonDateText": "LOVELY: 2026-10-24",
+  "comparisonDateText": "LOVELY: 2026-10-25",
   "dataSource": "MGF guild_info",
   "sourceUrls": {
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
@@ -27,9 +27,20 @@
   "manualAppliedCount": 0,
   "memberChanges": {
     "LOVELY": {
-      "newCount": 1,
+      "newCount": 2,
       "departedCount": 1,
       "newMembers": [
+        {
+          "guild": "LOVELY",
+          "nickname": "팡케",
+          "rank": 27,
+          "job": "바이퍼",
+          "level": 113,
+          "powerValue": 241473910000,
+          "powerText": "2414억 7391만",
+          "tobeolValue": 0,
+          "tobeolText": "0"
+        },
         {
           "guild": "LOVELY",
           "nickname": "LUNANV1",
@@ -680,24 +691,24 @@
     {
       "guild": "LOVELY",
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
-      "memberStatus": "existing",
+      "memberStatus": "new",
       "rank": 27,
       "nickname": "팡케",
       "job": "바이퍼",
       "level": 113,
       "powerValue": 241473910000,
       "powerText": "2414억 7391만",
-      "previousPowerValue": 241473910000,
-      "previousPowerText": "2414억 7391만",
-      "powerGrowthValue": 0,
-      "powerGrowthText": "0",
-      "powerGrowthRate": 0,
+      "previousPowerValue": null,
+      "previousPowerText": null,
+      "powerGrowthValue": null,
+      "powerGrowthText": null,
+      "powerGrowthRate": null,
       "tobeolValue": 0,
       "tobeolText": "0",
-      "previousTobeolValue": 0,
-      "previousTobeolText": "0",
-      "tobeolGrowthValue": 0,
-      "tobeolGrowthText": "0",
+      "previousTobeolValue": null,
+      "previousTobeolText": null,
+      "tobeolGrowthValue": null,
+      "tobeolGrowthText": null,
       "tobeolGrowthRate": null
     },
     {
