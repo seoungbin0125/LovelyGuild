@@ -6,14 +6,14 @@
     "LOVELY"
   ],
   "guild": "LOVELY",
-  "capturedDate": "2026-11-02",
+  "capturedDate": "2026-11-03",
   "comparisonMode": "weekly",
   "comparisonOffsetDays": -7,
-  "comparisonTargetDate": "2026-10-26",
+  "comparisonTargetDate": "2026-10-27",
   "comparisonDates": {
-    "LOVELY": "2026-10-26"
+    "LOVELY": "2026-10-27"
   },
-  "comparisonDateText": "LOVELY: 2026-10-26",
+  "comparisonDateText": "LOVELY: 2026-10-27",
   "dataSource": "MGF guild_info",
   "sourceUrls": {
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
@@ -27,8 +27,8 @@
   "manualAppliedCount": 0,
   "memberChanges": {
     "LOVELY": {
-      "newCount": 2,
-      "departedCount": 1,
+      "newCount": 1,
+      "departedCount": 0,
       "newMembers": [
         {
           "guild": "LOVELY",
@@ -40,47 +40,12 @@
           "powerText": "2414억 7391만",
           "tobeolValue": 0,
           "tobeolText": "0"
-        },
-        {
-          "guild": "LOVELY",
-          "nickname": "LUNANV1",
-          "rank": 30,
-          "job": "나이트로드",
-          "level": 60,
-          "powerValue": 6820000,
-          "powerText": "682만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
         }
       ],
-      "departedMembers": [
-        {
-          "guild": "LOVELY",
-          "nickname": "은수성",
-          "rank": 23,
-          "job": "비숍",
-          "level": 115,
-          "powerValue": 616590820000,
-          "powerText": "6165억 9082만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
-        }
-      ]
+      "departedMembers": []
     }
   },
-  "departedMembers": [
-    {
-      "guild": "LOVELY",
-      "nickname": "은수성",
-      "rank": 23,
-      "job": "비숍",
-      "level": 115,
-      "powerValue": 616590820000,
-      "powerText": "6165억 9082만",
-      "tobeolValue": 0,
-      "tobeolText": "0"
-    }
-  ],
+  "departedMembers": [],
   "guildSummaries": {
     "LOVELY": {
       "guildCount": 1,
@@ -760,24 +725,24 @@
     {
       "guild": "LOVELY",
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
-      "memberStatus": "new",
+      "memberStatus": "existing",
       "rank": 30,
       "nickname": "LUNANV1",
       "job": "나이트로드",
       "level": 60,
       "powerValue": 6820000,
       "powerText": "682만",
-      "previousPowerValue": null,
-      "previousPowerText": null,
-      "powerGrowthValue": null,
-      "powerGrowthText": null,
-      "powerGrowthRate": null,
+      "previousPowerValue": 6820000,
+      "previousPowerText": "682만",
+      "powerGrowthValue": 0,
+      "powerGrowthText": "0",
+      "powerGrowthRate": 0,
       "tobeolValue": 0,
       "tobeolText": "0",
-      "previousTobeolValue": null,
-      "previousTobeolText": null,
-      "tobeolGrowthValue": null,
-      "tobeolGrowthText": null,
+      "previousTobeolValue": 0,
+      "previousTobeolText": "0",
+      "tobeolGrowthValue": 0,
+      "tobeolGrowthText": "0",
       "tobeolGrowthRate": null
     }
   ]
