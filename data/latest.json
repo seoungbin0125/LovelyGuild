@@ -6,14 +6,14 @@
     "LOVELY"
   ],
   "guild": "LOVELY",
-  "capturedDate": "2026-11-05",
+  "capturedDate": "2026-11-06",
   "comparisonMode": "weekly",
   "comparisonOffsetDays": -7,
-  "comparisonTargetDate": "2026-10-29",
+  "comparisonTargetDate": "2026-10-30",
   "comparisonDates": {
-    "LOVELY": "2026-10-29"
+    "LOVELY": "2026-10-30"
   },
-  "comparisonDateText": "LOVELY: 2026-10-29",
+  "comparisonDateText": "LOVELY: 2026-10-30",
   "dataSource": "MGF guild_info",
   "sourceUrls": {
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
@@ -27,7 +27,7 @@
   "manualAppliedCount": 0,
   "memberChanges": {
     "LOVELY": {
-      "newCount": 3,
+      "newCount": 1,
       "departedCount": 0,
       "newMembers": [
         {
@@ -38,28 +38,6 @@
           "level": 117,
           "powerValue": 757160910000,
           "powerText": "7571억 6091만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
-        },
-        {
-          "guild": "LOVELY",
-          "nickname": "팡케",
-          "rank": 29,
-          "job": "바이퍼",
-          "level": 113,
-          "powerValue": 241473910000,
-          "powerText": "2414억 7391만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
-        },
-        {
-          "guild": "LOVELY",
-          "nickname": "살자몽구",
-          "rank": 30,
-          "job": "캡틴",
-          "level": 58,
-          "powerValue": 8670000,
-          "powerText": "867만",
           "tobeolValue": 0,
           "tobeolText": "0"
         }
@@ -724,47 +702,47 @@
     {
       "guild": "LOVELY",
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
-      "memberStatus": "new",
+      "memberStatus": "existing",
       "rank": 29,
       "nickname": "팡케",
       "job": "바이퍼",
       "level": 113,
       "powerValue": 241473910000,
       "powerText": "2414억 7391만",
-      "previousPowerValue": null,
-      "previousPowerText": null,
-      "powerGrowthValue": null,
-      "powerGrowthText": null,
-      "powerGrowthRate": null,
+      "previousPowerValue": 241473910000,
+      "previousPowerText": "2414억 7391만",
+      "powerGrowthValue": 0,
+      "powerGrowthText": "0",
+      "powerGrowthRate": 0,
       "tobeolValue": 0,
       "tobeolText": "0",
-      "previousTobeolValue": null,
-      "previousTobeolText": null,
-      "tobeolGrowthValue": null,
-      "tobeolGrowthText": null,
+      "previousTobeolValue": 0,
+      "previousTobeolText": "0",
+      "tobeolGrowthValue": 0,
+      "tobeolGrowthText": "0",
       "tobeolGrowthRate": null
     },
     {
       "guild": "LOVELY",
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
-      "memberStatus": "new",
+      "memberStatus": "existing",
       "rank": 30,
       "nickname": "살자몽구",
       "job": "캡틴",
       "level": 58,
       "powerValue": 8670000,
       "powerText": "867만",
-      "previousPowerValue": null,
-      "previousPowerText": null,
-      "powerGrowthValue": null,
-      "powerGrowthText": null,
-      "powerGrowthRate": null,
+      "previousPowerValue": 8670000,
+      "previousPowerText": "867만",
+      "powerGrowthValue": 0,
+      "powerGrowthText": "0",
+      "powerGrowthRate": 0,
       "tobeolValue": 0,
       "tobeolText": "0",
-      "previousTobeolValue": null,
-      "previousTobeolText": null,
-      "tobeolGrowthValue": null,
-      "tobeolGrowthText": null,
+      "previousTobeolValue": 0,
+      "previousTobeolText": "0",
+      "tobeolGrowthValue": 0,
+      "tobeolGrowthText": "0",
       "tobeolGrowthRate": null
     },
     {
