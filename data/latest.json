@@ -6,14 +6,14 @@
     "LOVELY"
   ],
   "guild": "LOVELY",
-  "capturedDate": "2026-11-20",
+  "capturedDate": "2026-11-21",
   "comparisonMode": "weekly",
   "comparisonOffsetDays": -7,
-  "comparisonTargetDate": "2026-11-13",
+  "comparisonTargetDate": "2026-11-14",
   "comparisonDates": {
-    "LOVELY": "2026-11-13"
+    "LOVELY": "2026-11-14"
   },
-  "comparisonDateText": "LOVELY: 2026-11-13",
+  "comparisonDateText": "LOVELY: 2026-11-14",
   "dataSource": "MGF guild_info",
   "sourceUrls": {
     "LOVELY": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY"
@@ -27,7 +27,7 @@
   "manualAppliedCount": 0,
   "memberChanges": {
     "LOVELY": {
-      "newCount": 3,
+      "newCount": 2,
       "departedCount": 2,
       "newMembers": [
         {
@@ -51,17 +51,6 @@
           "powerText": "2604억 6279만",
           "tobeolValue": 0,
           "tobeolText": "0"
-        },
-        {
-          "guild": "LOVELY",
-          "nickname": "포항가자미",
-          "rank": 28,
-          "job": "팔라딘",
-          "level": 115,
-          "powerValue": 254452530000,
-          "powerText": "2544억 5253만",
-          "tobeolValue": 0,
-          "tobeolText": "0"
         }
       ],
       "departedMembers": [
@@ -79,11 +68,11 @@
         {
           "guild": "LOVELY",
           "nickname": "수파디파디바",
-          "rank": 29,
+          "rank": 30,
           "job": "비숍",
           "level": 95,
-          "powerValue": 428877750000,
-          "powerText": "4288억 7775만",
+          "powerValue": 470063510000,
+          "powerText": "4700억 6351만",
           "tobeolValue": 0,
           "tobeolText": "0"
         }
@@ -105,11 +94,11 @@
     {
       "guild": "LOVELY",
       "nickname": "수파디파디바",
-      "rank": 29,
+      "rank": 30,
       "job": "비숍",
       "level": 95,
-      "powerValue": 428877750000,
-      "powerText": "4288억 7775만",
+      "powerValue": 470063510000,
+      "powerText": "4700억 6351만",
       "tobeolValue": 0,
       "tobeolText": "0"
     }
@@ -360,7 +349,7 @@
       "rank": 11,
       "nickname": "범스만",
       "job": "신궁",
-      "level": 118,
+      "level": 119,
       "powerValue": 814503240000,
       "powerText": "8145억 324만",
       "previousPowerValue": 814503240000,
@@ -496,13 +485,13 @@
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
       "memberStatus": "existing",
       "rank": 17,
-      "nickname": "알체라",
-      "job": "히어로",
+      "nickname": "메누몽",
+      "job": "비숍",
       "level": 117,
-      "powerValue": 612869290000,
-      "powerText": "6128억 6929만",
-      "previousPowerValue": 612869290000,
-      "previousPowerText": "6128억 6929만",
+      "powerValue": 417169730000,
+      "powerText": "4171억 6973만",
+      "previousPowerValue": 417169730000,
+      "previousPowerText": "4171억 6973만",
       "powerGrowthValue": 0,
       "powerGrowthText": "0",
       "powerGrowthRate": 0,
@@ -519,13 +508,13 @@
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
       "memberStatus": "existing",
       "rank": 18,
-      "nickname": "메누몽",
-      "job": "비숍",
+      "nickname": "알체라",
+      "job": "히어로",
       "level": 117,
-      "powerValue": 417169730000,
-      "powerText": "4171억 6973만",
-      "previousPowerValue": 417169730000,
-      "previousPowerText": "4171억 6973만",
+      "powerValue": 612869290000,
+      "powerText": "6128억 6929만",
+      "previousPowerValue": 612869290000,
+      "previousPowerText": "6128억 6929만",
       "powerGrowthValue": 0,
       "powerGrowthText": "0",
       "powerGrowthRate": 0,
@@ -705,7 +694,7 @@
       "rank": 26,
       "nickname": "밀탱",
       "job": "다크나이트",
-      "level": 115,
+      "level": 116,
       "powerValue": 302287220000,
       "powerText": "3022억 8722만",
       "previousPowerValue": 302287220000,
@@ -747,24 +736,24 @@
     {
       "guild": "LOVELY",
       "sourceUrl": "https://mgf.gg/contents/guild_info.php?g_name=LOVELY",
-      "memberStatus": "new",
+      "memberStatus": "existing",
       "rank": 28,
       "nickname": "포항가자미",
       "job": "팔라딘",
       "level": 115,
       "powerValue": 254452530000,
       "powerText": "2544억 5253만",
-      "previousPowerValue": null,
-      "previousPowerText": null,
-      "powerGrowthValue": null,
-      "powerGrowthText": null,
-      "powerGrowthRate": null,
+      "previousPowerValue": 254452530000,
+      "previousPowerText": "2544억 5253만",
+      "powerGrowthValue": 0,
+      "powerGrowthText": "0",
+      "powerGrowthRate": 0,
       "tobeolValue": 0,
       "tobeolText": "0",
-      "previousTobeolValue": null,
-      "previousTobeolText": null,
-      "tobeolGrowthValue": null,
-      "tobeolGrowthText": null,
+      "previousTobeolValue": 0,
+      "previousTobeolText": "0",
+      "tobeolGrowthValue": 0,
+      "tobeolGrowthText": "0",
       "tobeolGrowthRate": null
     },
     {
