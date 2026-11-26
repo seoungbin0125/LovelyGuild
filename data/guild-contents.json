@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-11-26",
+  "capturedAt": "2026-11-27",
   "source": "MGF.GG",
   "guilds": [
     {
@@ -8,7 +8,7 @@
         "league": {
           "label": "대항전",
           "url": "https://mgf.gg/contents/guild.php?mode=league&stx=LOVELY",
-          "matchCount": 5,
+          "matchCount": 4,
           "guilds": []
         },
         "training": {
